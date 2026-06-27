@@ -6,7 +6,7 @@ Reusable GitHub Actions for turborepo projects.
 
 | File | Trigger (in consumer) | Jobs |
 |------|----------------------|------|
-| `workflow-call-turborepo-ci.yml` | `push` / `pull_request` | lint, check-types, format, build (parallel) |
+| `workflow-call-turborepo-ci.yml` | `push` / `pull_request` | lint, check-types, build (parallel) |
 | `hello.yml` | manual test | hello world |
 
 Pin: `@v1` — not `@main`.

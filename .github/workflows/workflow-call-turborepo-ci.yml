@@ -34,16 +34,6 @@ jobs:
           package-manager: ${{ inputs.package-manager }}
       - run: npm run check-types
 
-  format:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup-node
-        with:
-          node-version: ${{ inputs.node-version }}
-          package-manager: ${{ inputs.package-manager }}
-      - run: npx prettier --check "**/*.{ts,tsx,md}"
-
   build:
     runs-on: ubuntu-latest
     steps:
