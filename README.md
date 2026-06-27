@@ -6,7 +6,7 @@ Reusable GitHub Actions for turborepo projects.
 
 | File | Trigger (in consumer) | Jobs |
 |------|----------------------|------|
-| `on-push-main.yml` | `push` → `main` | lint, check-types, build (parallel) |
+| `on-push-main.yml` | `push` → `main` | lint, check-types, build, test, audit (parallel) |
 | `hello.yml` | manual test | hello world |
 
 Uses `@main` — always latest from shared.
@@ -27,4 +27,4 @@ jobs:
     secrets: inherit
 ```
 
-Requires root scripts: `lint`, `check-types`, `build`.
+Requires root scripts: `lint`, `check-types`, `build`, `test`.
