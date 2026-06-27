@@ -40,4 +40,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: sargonpiraev/shared/.github/actions/setup-node-npm-ci@main
-      - run: npm audit
+      - run: npm audit --audit-level=critical
