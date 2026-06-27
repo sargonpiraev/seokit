@@ -2,13 +2,6 @@ name: on-push-main
 
 on:
   workflow_call:
-    inputs:
-      node-version:
-        type: string
-        default: "22"
-      package-manager:
-        type: string
-        default: npm
 
 permissions:
   contents: read
@@ -18,28 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup-node
-        with:
-          node-version: ${{ inputs.node-version }}
-          package-manager: ${{ inputs.package-manager }}
+      - uses: ./.github/actions/setup-node-npm-ci
       - run: npm run lint
 
   check-types:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup-node
-        with:
-          node-version: ${{ inputs.node-version }}
-          package-manager: ${{ inputs.package-manager }}
+      - uses: ./.github/actions/setup-node-npm-ci
       - run: npm run check-types
 
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup-node
-        with:
-          node-version: ${{ inputs.node-version }}
-          package-manager: ${{ inputs.package-manager }}
+      - uses: ./.github/actions/setup-node-npm-ci
       - run: npm run build
