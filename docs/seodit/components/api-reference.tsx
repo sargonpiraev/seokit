@@ -21,6 +21,16 @@ export function SeoditMatchersTable() {
   )
 }
 
+export function AssertSeoditRouteBasicsTable() {
+  return (
+    <AutoTypeTable
+      path={packageSrc('next/assertions.ts')}
+      name="assertSeoditRouteBasics"
+      generator={typeGenerator}
+    />
+  )
+}
+
 export function SeoIssueTable() {
   return (
     <AutoTypeTable path={packageSrc('types.ts')} name="SeoIssue" generator={typeGenerator} />

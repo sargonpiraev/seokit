@@ -25,7 +25,7 @@ Playwright-native SEO assertions for Next.js apps
    - [Playwright guide](https://sargonpiraev.github.io/shared/seodit/docs/playwright)
    - [Next.js adapter](https://sargonpiraev.github.io/shared/seodit/docs/next)
    - [API reference](https://sargonpiraev.github.io/shared/seodit/docs/api)
-3. For Next.js + next-intl apps, add `seodit.next.config.ts` with `routing` only and use `createSeoditPageRoutes(config, import.meta.url)` in colocated `page.seodit.spec.ts` files.
+3. For Next.js + next-intl apps, add `seodit.next.config.ts` with `routing` only and use `createSeoditPageRoutes(config, import.meta.url)` plus `assertSeoditRouteBasics(expect, page, route, baseURL)` in colocated `page.seodit.spec.ts` files.
 4. Follow the Playwright guide for project layout, `extendSeoditExpect`, and matchers.
 
 ## Key rules

@@ -23,7 +23,10 @@ Route patterns are inferred from the spec file path via `.next/app-path-routes-m
 ```typescript
 import { expect as baseExpect, test } from "@playwright/test";
 import { extendSeoditExpect } from "@sargonpiraev/seodit/playwright";
-import { createSeoditPageRoutes } from "@sargonpiraev/seodit/next";
+import {
+  assertSeoditRouteBasics,
+  createSeoditPageRoutes,
+} from "@sargonpiraev/seodit/next";
 
 import config from "@/seodit.next.config";
 
@@ -36,20 +39,13 @@ for (const route of routes) {
   test(route.pathname, async ({ page, baseURL }) => {
     await page.goto(route.pathname);
 
-    await expect(page).toHaveHtmlLang(route.locale);
-    await expect(page).toHaveCanonical(route.absoluteUrl(baseURL));
-    await expect(page).toHaveSelfAlternate(route.locale, route.absoluteUrl(baseURL));
-
-    for (const alternate of route.alternates(baseURL)) {
-      await expect(page).toHaveAlternate(alternate.locale, alternate.url);
-    }
-
+    await assertSeoditRouteBasics(expect, page, route, baseURL);
     await expect(page).toHaveJsonLdType("TVSeries");
   });
 }
 ```
 
-SEO expectations stay in the spec file. The adapter only builds the route matrix.
+`assertSeoditRouteBasics` covers `html[lang]`, canonical, self alternate, x-default, and every locale alternate for the route. Page-specific SEO expectations stay in the spec file.
 
 ## Coverage guard
 

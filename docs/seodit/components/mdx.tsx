@@ -3,6 +3,7 @@ import {
   AssertCanonicalTable,
   AssertJsonLdTypeTable,
   AssertMetaTitleTable,
+  AssertSeoditRouteBasicsTable,
   ExpectedValueTable,
   ExtendSeoditExpectTable,
   SeoditMatchersTable,
@@ -20,6 +21,7 @@ export function getMDXComponents(components?: MDXComponents) {
     AssertCanonicalTable,
     AssertMetaTitleTable,
     AssertJsonLdTypeTable,
+    AssertSeoditRouteBasicsTable,
     ...components,
   } satisfies MDXComponents
 }
