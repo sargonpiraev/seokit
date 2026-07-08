@@ -29,6 +29,10 @@
       "types": "./dist/jsonld/index.d.ts",
       "default": "./dist/jsonld/index.js"
     },
+    "./next": {
+      "types": "./dist/next/index.d.ts",
+      "default": "./dist/next/index.js"
+    },
     "./playwright": {
       "types": "./dist/playwright/index.d.ts",
       "default": "./dist/playwright/index.js"
@@ -40,6 +44,7 @@
     "prepare": "test -f dist/playwright/index.js || npm run build",
     "check-types": "tsc --noEmit",
     "test": "node --import tsx --test \"src/**/*.test.ts\"",
+    "test:next": "npm test -w seodit-next-example",
     "readme:gen": "tsx scripts/readme-gen.ts",
     "skill:init": "mkdir -p skills && cd skills && npx skills init seodit",
     "release:dry-run": "semantic-release --dry-run"

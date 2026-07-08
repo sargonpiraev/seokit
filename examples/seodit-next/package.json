@@ -1,0 +1,28 @@
+{
+  "name": "seodit-next-example",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p 3100",
+    "build": "next build --webpack",
+    "start": "next start -p 3100",
+    "test": "playwright test",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sargonpiraev/seodit": "*",
+    "next": "16.2.9",
+    "next-intl": "^4.13.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@repo/typescript-config": "*",
+    "@types/node": "^25.5.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "5.9.2"
+  }
+}

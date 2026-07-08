@@ -1,0 +1,71 @@
+---
+title: Next.js adapter
+description: Route matrix helpers for colocated seodit specs in Next.js + next-intl apps
+---
+
+## Config
+
+Keep only next-intl routing in `seodit.next.config.ts` — no `siteUrl`, no JSON-LD expectations:
+
+```typescript
+import { routing } from "@/i18n/routing";
+import { defineSeoditNextConfig } from "@sargonpiraev/seodit/next";
+
+export default defineSeoditNextConfig({ routing });
+```
+
+Use Playwright `baseURL` or `NEXT_PUBLIC_SITE_URL` for absolute URL assertions.
+
+## Colocated specs
+
+Route patterns are inferred from the spec file path via `.next/app-path-routes-manifest.json` after `next build`. Pass dynamic params only when needed:
+
+```typescript
+import { expect as baseExpect, test } from "@playwright/test";
+import { extendSeoditExpect } from "@sargonpiraev/seodit/playwright";
+import { createSeoditPageRoutes } from "@sargonpiraev/seodit/next";
+
+import config from "@/seodit.next.config";
+
+const expect = extendSeoditExpect(baseExpect);
+const routes = createSeoditPageRoutes(config, import.meta.url, {
+  params: [{ malId: "1" }],
+});
+
+for (const route of routes) {
+  test(route.pathname, async ({ page, baseURL }) => {
+    await page.goto(route.pathname);
+
+    await expect(page).toHaveHtmlLang(route.locale);
+    await expect(page).toHaveCanonical(route.absoluteUrl(baseURL));
+    await expect(page).toHaveSelfAlternate(route.locale, route.absoluteUrl(baseURL));
+
+    for (const alternate of route.alternates(baseURL)) {
+      await expect(page).toHaveAlternate(alternate.locale, alternate.url);
+    }
+
+    await expect(page).toHaveJsonLdType("TVSeries");
+  });
+}
+```
+
+SEO expectations stay in the spec file. The adapter only builds the route matrix.
+
+## Coverage guard
+
+Warn when Next page routes and colocated specs drift apart:
+
+```typescript
+import { checkSeoditSpecCoverage, formatSeoditSpecCoverageWarnings } from "@sargonpiraev/seodit/next";
+
+const coverage = checkSeoditSpecCoverage();
+console.warn(formatSeoditSpecCoverageWarnings(coverage));
+```
+
+## Example app
+
+See [`examples/seodit-next`](https://github.com/sargonpiraev/shared/tree/main/examples/seodit-next) in the shared repo. It is also used as the package integration fixture:
+
+```bash
+npm run test:next -w @sargonpiraev/seodit
+```

@@ -1,0 +1,13 @@
+{
+  "home": {
+    "title": "Seodit Example",
+    "description": "Minimal Next.js fixture for @sargonpiraev/seodit/next"
+  },
+  "anime": {
+    "title": "Anime",
+    "description": "Browse anime in the example catalog"
+  },
+  "detail": {
+    "title": "Cowboy Bebop"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "home": {
+    "title": "Пример Seodit",
+    "description": "Минимальный Next.js fixture для @sargonpiraev/seodit/next"
+  },
+  "anime": {
+    "title": "Аниме",
+    "description": "Каталог аниме в примере"
+  },
+  "detail": {
+    "title": "Ковбой Бибоп"
+  }
+}
