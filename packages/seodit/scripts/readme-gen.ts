@@ -43,7 +43,7 @@ const skillGitUrl =
   repoUrl && packageJson.repository?.directory
     ? `${repoUrl}/tree/main/${packageJson.repository.directory}/skills/${packageSlug}`
     : undefined;
-const ciWorkflow = "publish-seodit.yml";
+const ciWorkflow = "on-main-push-seodit.yml";
 const ciBadgeUrl = `https://img.shields.io/github/actions/workflow/status/${repo!.owner}/${repo!.name}/${ciWorkflow}?branch=main&label=main`;
 const ciLinkUrl = `https://github.com/${repo!.owner}/${repo!.name}/actions?query=branch%3Amain`;
 
