@@ -24,17 +24,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          registry-url: https://registry.npmjs.org
-
-      - run: npm install -g npm@$(node -p "require('./package.json').devEngines.packageManager.version")
-        working-directory: .
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
           cache: npm
           cache-dependency-path: package-lock.json
           registry-url: https://registry.npmjs.org
+
+      - name: Pin npm version
+        working-directory: .
+        run: npm install -g npm@$(node -p "require('./package.json').devEngines.packageManager.version")
 
       - run: npm ci
         working-directory: .
@@ -64,6 +60,10 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git tag "$TAG"
           git push origin "$TAG"
+
+      - name: Pin npm version for semantic-release
+        working-directory: .
+        run: npm install -g npm@$(node -p "require('./package.json').devEngines.packageManager.version")
 
       - run: npx semantic-release
         env:
