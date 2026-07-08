@@ -8,6 +8,7 @@ on:
       - "packages/seodit/**"
       - "examples/seodit-next/**"
       - ".github/workflows/on-main-push-seodit.yml"
+      - ".github/workflows/on-push-main.yml"
 
 permissions:
   contents: read
@@ -17,7 +18,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  checks:
+  base:
+    uses: ./.github/workflows/on-push-main.yml
+
+  test-next:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,14 +30,6 @@ jobs:
 
       - name: Build seodit
         run: npm run build
-        working-directory: packages/seodit
-
-      - name: Typecheck seodit
-        run: npm run check-types
-        working-directory: packages/seodit
-
-      - name: Unit tests
-        run: npm test
         working-directory: packages/seodit
 
       - name: Install Playwright browser
@@ -47,7 +43,7 @@ jobs:
           CI: true
 
   publish-npm:
-    needs: checks
+    needs: [base, test-next]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -99,7 +95,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish-docs:
-    needs: checks
+    needs: [base, test-next]
     runs-on: ubuntu-latest
     permissions:
       contents: read

@@ -7,7 +7,7 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
-    "test": "npm test -w @sargonpiraev/seodit && npm run test:next -w @sargonpiraev/seodit",
+    "test": "npm test -w @sargonpiraev/seodit",
     "prepare": "lefthook install"
   },
   "devDependencies": {
