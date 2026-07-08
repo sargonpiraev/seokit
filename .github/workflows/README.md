@@ -53,13 +53,12 @@ Example: `on-main-push-seodit.yml` adds `test-next` beside `base`, then publishe
 
 ### npm publish auth
 
-`publish-npm` uses GitHub OIDC (`id-token: write`) and falls back to `NPM_TOKEN` for `@semantic-release/npm`.
+`publish-npm` uses **npm Trusted Publishing (OIDC)** only — `id-token: write`, `registry-url` in `setup-node`. No `NPM_TOKEN` fallback.
 
-Either:
+On npmjs.com → `@sargonpiraev/seodit` → Trusted Publisher must match exactly:
 
-1. **Trusted Publishing (preferred)** — on npmjs.com → `@sargonpiraev/seodit` → Settings → Trusted Publisher → GitHub Actions → repo `sargonpiraev/shared`, workflow `on-main-push-seodit.yml`, environment optional.
-
-2. **Classic token** — add repo secret `NPM_TOKEN` with an Automation token that can publish `@sargonpiraev/seodit`.
+- Repository: `sargonpiraev/shared`
+- Workflow filename: `on-main-push-seodit.yml`
 
 ## Extension points
 
