@@ -17,12 +17,24 @@ module.exports = {
           { scope: "seodit", type: "refactor", release: false },
           { scope: "seodit", type: "ci", release: false },
           { scope: "seodit", type: "build", release: false },
-          { release: false },
+          { scope: "!seodit", release: false },
         ],
       },
     ],
     "@semantic-release/release-notes-generator",
-    "@semantic-release/npm",
+    [
+      "@semantic-release/npm",
+      {
+        pkgRoot: ".",
+      },
+    ],
+    [
+      "@semantic-release/git",
+      {
+        assets: ["package.json"],
+        message: "chore(seodit): release ${nextRelease.version} [skip ci]",
+      },
+    ],
     "@semantic-release/github",
   ],
 };

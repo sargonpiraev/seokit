@@ -43,6 +43,28 @@ jobs:
       - run: npm test
       - run: npm run check-types
 
+      - name: Sync seodit release tag with npm
+        working-directory: packages/seodit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          TAG="seodit-v${PKG_VERSION}"
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists"
+            exit 0
+          fi
+          NPM_VERSION=$(npm view @sargonpiraev/seodit version 2>/dev/null || true)
+          if [ -z "$NPM_VERSION" ] || [ "$NPM_VERSION" != "$PKG_VERSION" ]; then
+            echo "Skip tag sync: npm=$NPM_VERSION package.json=$PKG_VERSION"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag "$TAG"
+          git push origin "$TAG"
+
       - run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
