@@ -1,0 +1,45 @@
+---
+title: Getting started
+description: Install seodit and extend your local Playwright expect
+---
+
+## Installation
+
+```bash
+npm install @sargonpiraev/seodit @playwright/test
+```
+
+## Extend expect
+
+Import Playwright from your app, then extend it — do not import `test`/`expect` from the package.
+
+```typescript
+import { test, expect as baseExpect } from "@playwright/test";
+import { extendSeoditExpect } from "@sargonpiraev/seodit/playwright";
+
+const expect = extendSeoditExpect(baseExpect);
+
+test("home page SEO", async ({ page }) => {
+  await page.goto("/en");
+  await expect(page).toHaveCanonical("https://example.com/en");
+});
+```
+
+## Project layout
+
+Split Playwright projects in `playwright.config.ts`:
+
+- `app` → `**/*.test.ts`
+- `seodit` → `**/*.seodit.spec.ts`
+
+Co-locate specs next to routes, e.g. `src/app/[locale]/page.seodit.spec.ts`.
+
+## Pure HTML assertions
+
+For unit tests without a browser:
+
+```typescript
+import { assertCanonical } from "@sargonpiraev/seodit/html";
+
+const issues = assertCanonical(html, "https://example.com/en");
+```

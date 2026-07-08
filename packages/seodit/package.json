@@ -1,6 +1,7 @@
 {
   "name": "@sargonpiraev/seodit",
-  "version": "0.1.0",
+  "description": "Playwright-native SEO assertions for Next.js apps",
+  "version": "0.2.0",
   "private": false,
   "type": "module",
   "publishConfig": {
@@ -34,9 +35,10 @@
   },
   "scripts": {
     "dev": "tsc --watch",
-    "build": "tsc",
+    "build": "tsx scripts/readme-gen.ts && tsc",
     "check-types": "tsc --noEmit",
     "test": "node --import tsx --test \"src/**/*.test.ts\"",
+    "readme:gen": "tsx scripts/readme-gen.ts",
     "release:dry-run": "semantic-release --dry-run"
   },
   "dependencies": {
