@@ -17,7 +17,7 @@ Playwright-native SEO assertions for Next.js apps
 
 ## Instructions
 
-1. Install: `npm install @sargonpiraev/seodit @playwright/test`
+1. Install: `npm install @sargonpiraev/seodit @playwright/test` (preferred). For `file:` from a sibling repo use `file:../../../shared/packages/seodit` from `apps/webapp` — not `../../shared/...`.
 2. Read docs — from the installed package `package.json` (`llms`, `llmsFull`, `homepage`) or:
    - [llms.txt](https://sargonpiraev.github.io/shared/seodit/llms.txt)
    - [llms-full.txt](https://sargonpiraev.github.io/shared/seodit/llms-full.txt)

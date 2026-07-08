@@ -9,6 +9,16 @@ description: Install seodit and extend your local Playwright expect
 npm install @sargonpiraev/seodit @playwright/test
 ```
 
+### Local `file:` link (polyrepo)
+
+From `apps/webapp` in a consumer monorepo next to `shared/`:
+
+```json
+"@sargonpiraev/seodit": "file:../../../shared/packages/seodit"
+```
+
+Wrong depth (`file:../../shared/...`) creates a broken symlink. After `npm install`, the package `prepare` script builds `dist/` when it is missing. Prefer `npm install @sargonpiraev/seodit` from the registry when possible.
+
 ### Agent skill (optional)
 
 Use the bundled [Agent skill](/docs/agent-skill) so coding agents know how to integrate seodit.

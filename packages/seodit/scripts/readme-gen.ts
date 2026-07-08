@@ -68,6 +68,8 @@ ${packageJson.description}
 npm install ${npmName} @playwright/test
 \`\`\`
 
+Prefer the npm version in consumers. For a local \`file:\` link from another repo, point at \`shared/packages/seodit\` (three levels up from \`apps/webapp\`: \`file:../../../shared/packages/seodit\`). Run \`npm install\` in the consumer after linking — \`prepare\` builds \`dist/\` when missing.
+
 ## Agent skill (optional)
 
 For Cursor and other coding agents. [Agent skill docs](${docsUrl}/agent-skill).
@@ -121,7 +123,7 @@ ${packageJson.description}
 
 ## Instructions
 
-1. Install: \`npm install ${npmName} @playwright/test\`
+1. Install: \`npm install ${npmName} @playwright/test\` (preferred). For \`file:\` from a sibling repo use \`file:../../../shared/packages/seodit\` from \`apps/webapp\` — not \`../../shared/...\`.
 2. Read docs — from the installed package \`package.json\` (\`llms\`, \`llmsFull\`, \`homepage\`) or:
    - [llms.txt](${siteBase}/llms.txt)
    - [llms-full.txt](${siteBase}/llms-full.txt)

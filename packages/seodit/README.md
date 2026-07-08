@@ -15,6 +15,8 @@ Playwright-native SEO assertions for Next.js apps
 npm install @sargonpiraev/seodit @playwright/test
 ```
 
+Prefer the npm version in consumers. For a local `file:` link from another repo, point at `shared/packages/seodit` (three levels up from `apps/webapp`: `file:../../../shared/packages/seodit`). Run `npm install` in the consumer after linking — `prepare` builds `dist/` when missing.
+
 ## Agent skill (optional)
 
 For Cursor and other coding agents. [Agent skill docs](https://sargonpiraev.github.io/shared/seodit/docs/agent-skill).

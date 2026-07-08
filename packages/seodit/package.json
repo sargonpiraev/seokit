@@ -37,6 +37,7 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsx scripts/readme-gen.ts && tsc",
+    "prepare": "test -f dist/playwright/index.js || npm run build",
     "check-types": "tsc --noEmit",
     "test": "node --import tsx --test \"src/**/*.test.ts\"",
     "readme:gen": "tsx scripts/readme-gen.ts",
