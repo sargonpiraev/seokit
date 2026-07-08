@@ -9,6 +9,30 @@ description: Install seodit and extend your local Playwright expect
 npm install @sargonpiraev/seodit @playwright/test
 ```
 
+### Agent skill (optional)
+
+Use the bundled [Agent skill](/docs/agent-skill) so coding agents know how to integrate seodit.
+
+**Option A — `npx skills` (git)**
+
+```bash
+npx skills add https://github.com/sargonpiraev/shared/tree/main/packages/seodit/skills/seodit \
+  -a cursor \
+  -y
+```
+
+Listed on [skills.sh](https://skills.sh) via install telemetry — there is no manual publish or registry form.
+
+**Option B — `skills-npm` (version-locked)**
+
+```bash
+npm i -D skills-npm
+npx skills-npm setup
+npm install @sargonpiraev/seodit
+```
+
+`prepare` symlinks the skill from `node_modules` after each install. Opt-in only.
+
 ## Extend expect
 
 Import Playwright from your app, then extend it — do not import `test`/`expect` from the package.

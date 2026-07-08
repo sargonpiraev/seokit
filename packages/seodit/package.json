@@ -13,7 +13,8 @@
     "directory": "packages/seodit"
   },
   "files": [
-    "dist"
+    "dist",
+    "skills"
   ],
   "exports": {
     ".": {
@@ -39,6 +40,7 @@
     "check-types": "tsc --noEmit",
     "test": "node --import tsx --test \"src/**/*.test.ts\"",
     "readme:gen": "tsx scripts/readme-gen.ts",
+    "skill:init": "mkdir -p skills && cd skills && npx skills init seodit",
     "release:dry-run": "semantic-release --dry-run"
   },
   "dependencies": {
@@ -53,5 +55,8 @@
     "@types/node": "^25.5.0",
     "tsx": "^4.21.0",
     "typescript": "5.9.2"
-  }
+  },
+  "homepage": "https://sargonpiraev.github.io/shared/seodit/docs",
+  "llms": "https://sargonpiraev.github.io/shared/seodit/llms.txt",
+  "llmsFull": "https://sargonpiraev.github.io/shared/seodit/llms-full.txt"
 }

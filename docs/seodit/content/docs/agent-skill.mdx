@@ -1,0 +1,69 @@
+---
+title: Agent skill
+description: Use the seodit Agent Skill in Cursor and other coding agents
+---
+
+The package ships one Agent Skill named **seodit** — an integration playbook for coding agents. API details and examples live in the docs; the skill tells agents *when* and *how* to wire seodit in a Next.js app.
+
+## Skill layout
+
+```
+packages/seodit/skills/seodit/SKILL.md
+```
+
+Scaffold once with the official Vercel CLI, then `readme-gen.ts` fills URLs and rules on every build:
+
+```bash
+npm run skill:init   # npx skills init seodit
+npm run readme:gen   # overwrite SKILL.md with deterministic content
+```
+
+Per [agentskills.io](https://agentskills.io/specification), the skill `name` matches the directory (`seodit`). One umbrella skill per npm package is the usual pattern for libraries.
+
+## Install the skill
+
+### Option A — `npx skills` (git)
+
+```bash
+npx skills add https://github.com/sargonpiraev/shared/tree/main/packages/seodit/skills/seodit \
+  -a cursor \
+  -y
+```
+
+Run once per project. Update later with `npx skills update seodit`.
+
+### skills.sh listing
+
+There is **no publish command** for [skills.sh](https://skills.sh). The index is built from anonymous install telemetry when users run `npx skills add`. After enough installs, the skill can appear at a URL like `https://skills.sh/sargonpiraev/shared/seodit`. You do not submit a form or open a PR — share the install command in README and docs instead.
+
+### Option B — `skills-npm` (version-locked)
+
+```bash
+npm i -D skills-npm
+npx skills-npm setup
+npm install @sargonpiraev/seodit
+```
+
+`prepare` symlinks skills from `node_modules` after each install. Opt-in only — consumers who skip `skills-npm` are unaffected.
+
+## Agent workflow
+
+Tell the agent what to integrate; referencing the skill is optional if the task clearly matches SEO / Playwright / seodit:
+
+```text
+Integrate @sargonpiraev/seodit in apps/webapp. Add *.seodit.spec.ts for /en and /ru.
+```
+
+The agent should:
+
+1. Follow `SKILL.md` (if installed)
+2. Run `npm install @sargonpiraev/seodit @playwright/test`
+3. Read `llms` / `llmsFull` from the installed package `package.json`
+4. Implement per [Getting started](/docs/getting-started) and [Playwright](/docs/playwright)
+
+## AI documentation index
+
+- [llms.txt](/llms.txt) — compact index
+- [llms-full.txt](/llms-full.txt) — full docs bundle
+
+These URLs are also in the published package `package.json` as `llms` and `llmsFull`.

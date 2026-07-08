@@ -5,12 +5,33 @@
 [![npm version](https://img.shields.io/npm/v/@sargonpiraev%2fseodit)](https://www.npmjs.com/package/@sargonpiraev%2fseodit)
 [![npm downloads](https://img.shields.io/npm/dm/@sargonpiraev%2fseodit)](https://www.npmjs.com/package/@sargonpiraev%2fseodit)
 [![main](https://img.shields.io/github/actions/workflow/status/sargonpiraev/shared/publish-seodit.yml?branch=main&label=main)](https://github.com/sargonpiraev/shared/actions?query=branch%3Amain)
+[![skills.sh](https://skills.sh/b/sargonpiraev/shared)](https://skills.sh/sargonpiraev/shared)
 
 Playwright-native SEO assertions for Next.js apps
 
 ## Install
 
 ```bash
+npm install @sargonpiraev/seodit @playwright/test
+```
+
+## Agent skill (optional)
+
+For Cursor and other coding agents. [Agent skill docs](https://sargonpiraev.github.io/shared/seodit/docs/agent-skill).
+
+**Option A — `npx skills` (git)**
+
+```bash
+npx skills add https://github.com/sargonpiraev/shared/tree/main/packages/seodit/skills/seodit -a cursor -y
+```
+
+Appears on [skills.sh](https://skills.sh) automatically when people install it — no separate publish step.
+
+**Option B — `skills-npm` (version-locked)**
+
+```bash
+npm i -D skills-npm
+npx skills-npm setup
 npm install @sargonpiraev/seodit
 ```
 
