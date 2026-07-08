@@ -24,12 +24,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: package-lock.json
           registry-url: https://registry.npmjs.org
 
       - run: npm install -g npm@$(node -p "require('./package.json').devEngines.packageManager.version")
         working-directory: .
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+          registry-url: https://registry.npmjs.org
 
       - run: npm ci
         working-directory: .
