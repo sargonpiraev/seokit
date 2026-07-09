@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sargonpiraev/shared.git",
+    "url": "https://github.com/sargonpiraev/seodit.git",
     "directory": "packages/seodit"
   },
   "files": [
@@ -36,7 +36,7 @@
     "prepare": "test -f dist/playwright/index.js || npm run build",
     "check-types": "tsc --noEmit",
     "test": "node --import tsx --test \"src/**/*.test.ts\"",
-    "test:next": "npm test -w seodit-next-example",
+    "test:next": "npm test -w seodit-example",
     "readme:gen": "tsx scripts/readme-gen.ts",
     "skill:init": "mkdir -p skills && cd skills && npx skills init seodit",
     "release:dry-run": "semantic-release --dry-run"
@@ -54,10 +54,10 @@
     "tsx": "^4.21.0",
     "typescript": "5.9.2"
   },
-  "homepage": "https://sargonpiraev.github.io/shared/seodit/docs",
-  "llms": "https://sargonpiraev.github.io/shared/seodit/llms.txt",
-  "llmsFull": "https://sargonpiraev.github.io/shared/seodit/llms-full.txt",
-  "skills": "https://github.com/sargonpiraev/shared/tree/main/packages/seodit/skills/seodit",
+  "homepage": "https://sargonpiraev.github.io/seodit/docs",
+  "llms": "https://sargonpiraev.github.io/seodit/llms.txt",
+  "llmsFull": "https://sargonpiraev.github.io/seodit/llms-full.txt",
+  "skills": "https://github.com/sargonpiraev/seodit/tree/main/packages/seodit/skills/seodit",
   "agents": {
     "skills": [
       {

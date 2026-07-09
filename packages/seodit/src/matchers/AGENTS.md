@@ -50,7 +50,7 @@ export async function toHaveSomething(page: Page, expected: string | RegExp) {
 - Shared helpers like `matchesExpected` / `ExpectedValue` for simple checks
 - Copies of Playwright internals (`_expect`, `expectTypes`, `toMatchText`)
 - Subfolders, `index.ts`, `discover.ts`, or other non-matcher files here
-- Docs discovery lives in `docs/seodit`, not in this folder
+- Docs discovery lives in `apps/docs`, not in this folder
 
 ## Register
 

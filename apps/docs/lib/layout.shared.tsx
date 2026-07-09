@@ -8,7 +8,7 @@ export function baseOptions(): BaseLayoutProps {
     links: [
       {
         text: 'GitHub',
-        url: 'https://github.com/sargonpiraev/shared/tree/main/packages/seodit',
+        url: 'https://github.com/sargonpiraev/seodit/tree/main/packages/seodit',
         external: true,
       },
       {

@@ -1,49 +1,23 @@
 name: on-push-main
 
 on:
-  workflow_call:
-    inputs:
-      skip-audit:
-        type: boolean
-        default: false
-        description: Skip npm audit job
+  push:
+    branches: [main]
 
 permissions:
   contents: read
 
+concurrency:
+  group: on-push-main-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: ./.github/actions/setup-node-npm-ci
-      - run: npm run lint
-
-  check-types:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: ./.github/actions/setup-node-npm-ci
-      - run: npm run check-types
-
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: ./.github/actions/setup-node-npm-ci
-      - run: npm run build
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: ./.github/actions/setup-node-npm-ci
-      - run: npm run test
-
-  audit:
-    if: ${{ !inputs.skip-audit }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: ./.github/actions/setup-node-npm-ci
-      - run: npm audit --audit-level=critical
+  ci:
+    uses: sargonpiraev/ci/.github/workflows/on-push-main-seodit.yml@main
+    secrets: inherit
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+      pages: write
