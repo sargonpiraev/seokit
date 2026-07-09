@@ -5,7 +5,7 @@ import { JsonLd } from "@/components/json-ld";
 import { FIXTURE_ANIME, getFixtureAnimeDescription, getFixtureAnimeTitle } from "@/lib/fixtures";
 import { buildPageMetadata } from "@/lib/metadata";
 
-const metadataBase = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3100");
+const metadataBase = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:4100");
 
 type AnimeDetailPageProps = {
   params: Promise<{ locale: string; malId: string }>;

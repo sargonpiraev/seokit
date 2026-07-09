@@ -1,71 +1,94 @@
 ---
 title: Getting started
-description: Install seodit and extend your local Playwright expect
+description: Install seodit and write your first colocated SEO spec
 ---
 
-## Installation
+## 1. Install
 
 ```bash
 npm install @sargonpiraev/seodit @playwright/test
 ```
 
-Install seodit in the app or test package that owns your Playwright configuration. It is a Playwright expect extension, so keep using your app's existing `@playwright/test` import.
+## 2. Extend
 
-### Agent skill (optional)
-
-Use the bundled [Agent skill](/docs/agent-skill) so coding agents know how to integrate seodit.
-
-**Option A — `npx skills` (git)**
-
-```bash
-npx skills add https://github.com/sargonpiraev/shared/tree/main/packages/seodit/skills/seodit \
-  -a cursor \
-  -y
-```
-
-Run this once in a project where you want your coding agent to have seodit-specific integration guidance.
-
-**Option B — `skills-npm` (version-locked)**
-
-```bash
-npm i -D skills-npm
-npx skills-npm setup
-npm install @sargonpiraev/seodit
-```
-
-Use this option when you want the skill to follow the npm package version installed in your project.
-
-## Extend expect
-
-Import Playwright from your app, then extend it — do not import `test`/`expect` from the package.
+Create `src/test/seodit.ts`:
 
 ```typescript
-import { test, expect as baseExpect } from "@playwright/test";
-import { extendSeoditExpect } from "@sargonpiraev/seodit/playwright";
+import { expect as baseExpect, test } from "@playwright/test";
+import { extendSeoditExpect } from "@sargonpiraev/seodit";
 
 const expect = extendSeoditExpect(baseExpect);
 
-test("home page SEO", async ({ page }) => {
-  await page.goto("/en");
-  await expect(page).toHaveCanonical("https://example.com/en");
+export { test, expect };
+```
+
+Import `test` and `expect` from this file in every SEO spec — not from `@playwright/test` directly.
+
+## 3. Playwright project
+
+In `playwright.config.ts`, keep SEO specs in their own project:
+
+```typescript
+import { defineConfig } from "@playwright/test";
+
+export default defineConfig({
+  testDir: "./src",
+  projects: [
+    { name: "app", testMatch: "**/*.test.ts" },
+    { name: "seodit", testMatch: "**/*.seodit.spec.ts" },
+  ],
+  use: {
+    baseURL: process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:3000",
+  },
 });
 ```
 
-## Project layout
+```bash
+npx playwright test --project seodit
+```
 
-Split Playwright projects in `playwright.config.ts`:
+## 4. First colocated spec
 
-- `app` → `**/*.test.ts`
-- `seodit` → `**/*.seodit.spec.ts`
+Place the spec next to the page, for example:
 
-Co-locate specs next to routes, e.g. `src/app/[locale]/page.seodit.spec.ts`.
-
-## Pure HTML assertions
-
-For unit tests without a browser:
+`src/app/[locale]/anime/[id]/page.seodit.spec.ts`
 
 ```typescript
-import { assertCanonical } from "@sargonpiraev/seodit/html";
+import { routing } from "@/i18n/routing";
+import { test, expect } from "@/test/seodit";
 
-const issues = assertCanonical(html, "https://example.com/en");
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+const id = "1";
+
+for (const locale of routing.locales) {
+  const pageUrl = new URL(`/${locale}/anime/${id}`, siteUrl).toString();
+
+  test(pageUrl, async ({ page }) => {
+    await page.goto(pageUrl);
+
+    await expect(page).toHaveHtmlLang(locale);
+    await expect(page).toHaveCanonical(pageUrl);
+    await expect(page).toHaveSelfAlternate(locale, pageUrl);
+
+    const xDefaultUrl = new URL(`/${routing.defaultLocale}/anime/${id}`, siteUrl).toString();
+    await expect(page).toHaveXDefaultAlternate(xDefaultUrl);
+
+    for (const alternateLocale of routing.locales) {
+      const alternateUrl = new URL(`/${alternateLocale}/anime/${id}`, siteUrl).toString();
+      await expect(page).toHaveAlternate(alternateLocale, alternateUrl);
+    }
+  });
+}
 ```
+
+## 5. How it works
+
+The example above does three things:
+
+1. **`routing.locales`** — iterate the same next-intl locale list your app already uses.
+2. **`id`** — dynamic segments are just values you pass in the spec (`"1"`).
+3. **Matchers** — assert against absolute URLs built with `new URL(..., siteUrl)`. The same `pageUrl` is the test title and what you pass to `page.goto`.
+
+See all matchers in [Matchers](/docs/matchers).
+
+Working example: [`examples/seodit-next`](https://github.com/sargonpiraev/shared/tree/main/examples/seodit-next).

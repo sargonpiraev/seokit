@@ -4,7 +4,7 @@ execSync("npx next build --webpack", {
   stdio: "inherit",
 });
 
-const child = spawn("npx", ["next", "start", "-p", "3100"], {
+const child = spawn("npx", ["next", "start", "-p", "4100"], {
   stdio: "inherit",
 });
 

@@ -1,27 +1,13 @@
 import defaultMdxComponents from 'fumadocs-ui/mdx'
-import {
-  AssertCanonicalTable,
-  AssertJsonLdTypeTable,
-  AssertMetaTitleTable,
-  AssertSeoditRouteBasicsTable,
-  ExpectedValueTable,
-  ExtendSeoditExpectTable,
-  SeoditMatchersTable,
-  SeoIssueTable,
-} from '@/components/api-reference'
+import { MatcherDoc } from '@/components/matcher-doc'
+import { MatcherIndex } from '@/components/matcher-index'
 import type { MDXComponents } from 'mdx/types'
 
 export function getMDXComponents(components?: MDXComponents) {
   return {
     ...defaultMdxComponents,
-    ExtendSeoditExpectTable,
-    SeoditMatchersTable,
-    SeoIssueTable,
-    ExpectedValueTable,
-    AssertCanonicalTable,
-    AssertMetaTitleTable,
-    AssertJsonLdTypeTable,
-    AssertSeoditRouteBasicsTable,
+    MatcherDoc,
+    MatcherIndex,
     ...components,
   } satisfies MDXComponents
 }

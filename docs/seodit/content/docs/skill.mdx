@@ -1,0 +1,30 @@
+---
+title: Skill
+description: Install and update the seodit skill for Cursor and other coding agents
+---
+
+The package ships a **seodit** skill — a short playbook so coding agents wire SEO specs correctly. Human docs stay in [Getting started](/docs/getting-started) and [Matchers](/docs/matchers).
+
+## Install via skills.sh
+
+```bash
+npx skills add https://github.com/sargonpiraev/shared/tree/main/packages/seodit/skills/seodit \
+  -a cursor \
+  -y
+```
+
+## Update via skills.sh
+
+```bash
+npx skills update seodit
+```
+
+## Install via skills-npm
+
+Optional. Locks the skill to the installed `@sargonpiraev/seodit` version via [skills-npm](https://github.com/antfu/skills-npm):
+
+```bash
+npm i -D skills-npm
+npx skills-npm setup
+npm install @sargonpiraev/seodit
+```

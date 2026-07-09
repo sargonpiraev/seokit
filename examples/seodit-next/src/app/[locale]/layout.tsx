@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/json-ld";
 import { routing } from "@/i18n/routing";
 import { SITE_NAME } from "@/lib/metadata";
 
-const metadataBase = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3100");
+const metadataBase = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:4100");
 
 type LocaleLayoutProps = {
   children: React.ReactNode;

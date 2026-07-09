@@ -1,28 +1,10 @@
 ---
 title: Overview
-description: Playwright-native SEO assertions for Next.js apps
+description: Playwright SEO matchers for Next.js + next-intl apps
 ---
 
-seodit is a blackbox SEO assertion layer for Playwright. Use granular matchers like `toHaveCanonical` and pure HTML/JSON-LD helpers for co-located `.seodit.spec.ts` files.
+**seodit** is a Playwright extension with SEO matchers for Next.js apps that use next-intl.
 
-## Install
+Colocate `page.seodit.spec.ts` next to a route, loop your next-intl `routing.locales`, and assert canonical, hreflang, Open Graph, Twitter, robots, and JSON-LD with granular `toHave*` matchers.
 
-```bash
-npm install @sargonpiraev/seodit
-```
-
-## Features
-
-- Granular Playwright matchers mapped to Next.js metadata concepts
-- Pure `assert*` helpers over rendered HTML
-- JSON-LD type checks
-- Route basics helper for localized canonical and hreflang checks
-- `extendSeoditExpect` — no duplicate `@playwright/test` instance
-
-## Next steps
-
-- [Getting started](/docs/getting-started) — wire Playwright in your app
-- [Playwright](/docs/playwright) — matchers and project layout
-- [Next.js adapter](/docs/next) — route matrix helpers for colocated specs
-- [API reference](/docs/api) — generated from TypeScript source
-- [Agent skill](/docs/agent-skill) — Cursor / Agent Skills integration
+Start with [Getting started](/docs/getting-started).

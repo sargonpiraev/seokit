@@ -3,13 +3,11 @@ export interface SeoditNextRouting {
   defaultLocale: string;
 }
 
-export interface SeoditNextConfig<TRouting extends SeoditNextRouting = SeoditNextRouting> {
-  routing: TRouting;
-}
-
 export type SeoditRouteParams = Record<string, string>;
 
 export interface CreateSeoditPageRoutesOptions {
+  /** Absolute origin for canonical / alternate URLs (e.g. `https://anidex.tv`). */
+  origin?: string;
   params?: SeoditRouteParams[];
   appDir?: string;
   buildDir?: string;
@@ -25,9 +23,10 @@ export interface SeoditPageRoute {
   pathname: string;
   params: SeoditRouteParams;
   pattern: string;
-  absoluteUrl(baseURL: string | undefined, pathname?: string): string;
-  alternates(baseURL: string | undefined): SeoditPageRouteAlternate[];
-  xDefaultUrl(baseURL: string | undefined): string;
+  /** Absolute URL. Uses `origin` from options when `baseURL` is omitted. */
+  absoluteUrl(baseURL?: string, pathname?: string): string;
+  alternates(baseURL?: string): SeoditPageRouteAlternate[];
+  xDefaultUrl(baseURL?: string): string;
 }
 
 export interface ReadNextPageRoutesOptions {

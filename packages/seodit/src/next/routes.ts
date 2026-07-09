@@ -1,23 +1,19 @@
 import type {
   CreateSeoditPageRoutesOptions,
-  SeoditNextConfig,
   SeoditNextRouting,
   SeoditPageRoute,
-  SeoditPageRouteAlternate,
   SeoditRouteParams,
 } from "./types.js";
 import { inferRouteFromSpec } from "./manifest.js";
 
 const LOCALE_PARAM = "locale";
 
-export function defineSeoditNextConfig<TRouting extends SeoditNextRouting>(
-  config: SeoditNextConfig<TRouting>,
-): SeoditNextConfig<TRouting> {
-  return config;
-}
-
-export function createSeoditPageRoutes<TRouting extends SeoditNextRouting>(
-  config: SeoditNextConfig<TRouting>,
+/**
+ * Expand colocated `page.seodit.spec.ts` into one case per next-intl locale.
+ * Pass the same `routing` object you give to next-intl.
+ */
+export function createSeoditPageRoutes(
+  routing: SeoditNextRouting,
   importMetaUrl: string,
   options: CreateSeoditPageRoutesOptions = {},
 ): SeoditPageRoute[] {
@@ -29,12 +25,12 @@ export function createSeoditPageRoutes<TRouting extends SeoditNextRouting>(
   const paramSets = options.params?.length ? options.params : [{}];
   const routes: SeoditPageRoute[] = [];
 
-  for (const locale of config.routing.locales) {
+  for (const locale of routing.locales) {
     for (const paramSet of paramSets) {
       const params = { ...paramSet, [LOCALE_PARAM]: locale };
       const pathname = buildPathname(pattern, params);
 
-      routes.push(createRouteCase(pattern, locale, pathname, params, config.routing));
+      routes.push(createRouteCase(pattern, locale, pathname, params, routing, options.origin));
     }
   }
 
@@ -47,24 +43,30 @@ function createRouteCase(
   pathname: string,
   params: SeoditRouteParams,
   routing: SeoditNextRouting,
+  origin: string | undefined,
 ): SeoditPageRoute {
+  const resolveOrigin = (baseURL?: string) => baseURL ?? origin;
+
   return {
     locale,
     pathname,
     params,
     pattern,
     absoluteUrl(baseURL, targetPathname = pathname) {
-      return joinBaseUrl(baseURL, targetPathname);
+      return joinBaseUrl(resolveOrigin(baseURL), targetPathname);
     },
     alternates(baseURL) {
       return routing.locales.map((alternateLocale) => ({
         locale: alternateLocale,
-        url: joinBaseUrl(baseURL, buildPathname(pattern, { ...params, [LOCALE_PARAM]: alternateLocale })),
+        url: joinBaseUrl(
+          resolveOrigin(baseURL),
+          buildPathname(pattern, { ...params, [LOCALE_PARAM]: alternateLocale }),
+        ),
       }));
     },
     xDefaultUrl(baseURL) {
       return joinBaseUrl(
-        baseURL,
+        resolveOrigin(baseURL),
         buildPathname(pattern, { ...params, [LOCALE_PARAM]: routing.defaultLocale }),
       );
     },
@@ -88,20 +90,4 @@ function joinBaseUrl(baseURL: string | undefined, pathname: string): string {
   }
 
   return new URL(pathname, baseURL).toString();
-}
-
-export function buildPathnameForPattern(pattern: string, params: SeoditRouteParams): string {
-  return buildPathname(pattern, params);
-}
-
-export function createAlternateUrls(
-  pattern: string,
-  params: SeoditRouteParams,
-  locales: readonly string[],
-  baseURL: string | undefined,
-): SeoditPageRouteAlternate[] {
-  return locales.map((locale) => ({
-    locale,
-    url: joinBaseUrl(baseURL, buildPathname(pattern, { ...params, [LOCALE_PARAM]: locale })),
-  }));
 }

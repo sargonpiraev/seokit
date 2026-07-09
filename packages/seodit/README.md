@@ -7,7 +7,7 @@
 [![main](https://img.shields.io/github/actions/workflow/status/sargonpiraev/shared/on-push-main-seodit.yml?branch=main&label=main)](https://github.com/sargonpiraev/shared/actions?query=branch%3Amain)
 [![skills.sh](https://skills.sh/b/sargonpiraev/shared)](https://skills.sh/sargonpiraev/shared)
 
-Playwright-native SEO assertions for Next.js apps
+Playwright SEO matchers for Next.js + next-intl apps
 
 ## Install
 
@@ -15,21 +15,17 @@ Playwright-native SEO assertions for Next.js apps
 npm install @sargonpiraev/seodit @playwright/test
 ```
 
-Install from npm in the application where your Playwright tests run. The package extends your existing `@playwright/test` expect instance instead of exporting its own test runner.
+## Skill (optional)
 
-## Agent skill (optional)
+For Cursor and other coding agents. [Skill docs](https://sargonpiraev.github.io/shared/seodit/docs/skill).
 
-For Cursor and other coding agents. [Agent skill docs](https://sargonpiraev.github.io/shared/seodit/docs/agent-skill).
-
-**Option A — `npx skills` (git)**
+**skills.sh**
 
 ```bash
 npx skills add https://github.com/sargonpiraev/shared/tree/main/packages/seodit/skills/seodit -a cursor -y
 ```
 
-Use this option when you want to install the skill directly from its Git source.
-
-**Option B — `skills-npm` (version-locked)**
+**skills-npm** (version-locked)
 
 ```bash
 npm i -D skills-npm

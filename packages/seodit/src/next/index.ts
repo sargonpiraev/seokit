@@ -1,4 +1,4 @@
-export { defineSeoditNextConfig, createSeoditPageRoutes, buildPathnameForPattern, createAlternateUrls } from "./routes.js";
+export { createSeoditPageRoutes } from "./routes.js";
 export { assertSeoditRouteBasics } from "./assertions.js";
 export type { SeoditRouteBasicsExpect } from "./assertions.js";
 export {
@@ -9,9 +9,5 @@ export {
   discoverSeoditSpecRoutes,
   readAppPathRoutesManifest,
 } from "./manifest.js";
-export {
-  checkSeoditSpecCoverage,
-  formatSeoditSpecCoverageWarnings,
-  resolveProjectRootFromSpec,
-} from "./coverage.js";
+export { checkSeoditSpecCoverage, formatSeoditSpecCoverageWarnings } from "./coverage.js";
 export type * from "./types.js";

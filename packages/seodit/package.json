@@ -1,6 +1,6 @@
 {
   "name": "@sargonpiraev/seodit",
-  "description": "Playwright-native SEO assertions for Next.js apps",
+  "description": "Playwright SEO matchers for Next.js + next-intl apps",
   "version": "0.6.0",
   "private": false,
   "type": "module",
@@ -21,14 +21,6 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./html": {
-      "types": "./dist/html/index.d.ts",
-      "default": "./dist/html/index.js"
-    },
-    "./jsonld": {
-      "types": "./dist/jsonld/index.d.ts",
-      "default": "./dist/jsonld/index.js"
-    },
     "./next": {
       "types": "./dist/next/index.d.ts",
       "default": "./dist/next/index.js"
@@ -48,9 +40,6 @@
     "readme:gen": "tsx scripts/readme-gen.ts",
     "skill:init": "mkdir -p skills && cd skills && npx skills init seodit",
     "release:dry-run": "semantic-release --dry-run"
-  },
-  "dependencies": {
-    "cheerio": "^1.2.0"
   },
   "peerDependencies": {
     "@playwright/test": ">=1.51.0"

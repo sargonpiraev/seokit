@@ -1,5 +1,3 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 import type { CheckSeoditSpecCoverageOptions, SeoditSpecCoverageResult } from "./types.js";
 import { discoverSeoditSpecRoutes, readNextPageRoutes } from "./manifest.js";
 
@@ -38,16 +36,4 @@ export function formatSeoditSpecCoverageWarnings(result: SeoditSpecCoverageResul
   }
 
   return result.warnings.join("\n");
-}
-
-export function resolveProjectRootFromSpec(importMetaUrl: string, appDir = "src/app"): string {
-  const specFilePath = fileURLToPath(importMetaUrl);
-  const marker = `${path.sep}${appDir}${path.sep}`;
-  const index = specFilePath.indexOf(marker);
-
-  if (index === -1) {
-    throw new Error(`Could not resolve project root from seodit spec path: ${specFilePath}`);
-  }
-
-  return specFilePath.slice(0, index);
 }

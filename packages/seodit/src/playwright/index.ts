@@ -1,133 +1,72 @@
-import type { Page } from "@playwright/test";
-import {
-  assertAlternate,
-  assertAlternateMedia,
-  assertAlternateType,
-  assertCanonical,
-  assertGoogleBotMeta,
-  assertHtmlLang,
-  assertMetaDescription,
-  assertMetaName,
-  assertMetaTitle,
-  assertOpenGraphAudio,
-  assertOpenGraphDescription,
-  assertOpenGraphImage,
-  assertOpenGraphImageAlt,
-  assertOpenGraphImageSize,
-  assertOpenGraphLocale,
-  assertOpenGraphSiteName,
-  assertOpenGraphTitle,
-  assertOpenGraphType,
-  assertOpenGraphUrl,
-  assertOpenGraphVideo,
-  assertRobotsMeta,
-  assertSelfAlternate,
-  assertTwitterCard,
-  assertTwitterCreator,
-  assertTwitterDescription,
-  assertTwitterImage,
-  assertTwitterImageAlt,
-  assertTwitterSite,
-  assertTwitterTitle,
-  assertXDefaultAlternate,
-} from "../html/index.js";
-import { assertJsonLdType, assertValidJsonLd } from "../jsonld/index.js";
-import type { ExpectedValue, OpenGraphImageSizeExpectation, RobotsMetaExpectation, SeoIssue } from "../types.js";
-
-type MatcherContext = {
-  isNot: boolean;
-  utils: {
-    printExpected(value: unknown): string;
-    printReceived(value: unknown): string;
-  };
-};
-
-type PageAssertion<TArgs extends unknown[]> = (html: string, ...args: TArgs) => SeoIssue[];
-
-function isPage(received: unknown): received is Page {
-  return typeof received === "object" && received !== null && "content" in received;
-}
-
-function formatIssue(issue: SeoIssue): string {
-  const selector = issue.selector ? `\n  selector: ${issue.selector}` : "";
-  const expected = issue.expected === undefined ? "" : `\n  expected: ${String(issue.expected)}`;
-  const actual = issue.actual === undefined ? "\n  actual: <missing>" : `\n  actual: ${String(issue.actual)}`;
-  return `- ${issue.message}${selector}${expected}${actual}`;
-}
-
-function createPageMatcher<TArgs extends unknown[]>(name: string, assertion: PageAssertion<TArgs>) {
-  return async function matcher(this: MatcherContext, received: unknown, ...args: TArgs) {
-    if (!isPage(received)) {
-      return {
-        pass: false,
-        name,
-        message: () => `${name} expects a Playwright Page`,
-      };
-    }
-
-    const html = await received.content();
-    const issues = assertion(html, ...args);
-    const basePass = issues.length === 0;
-    const pass = this.isNot ? !basePass : basePass;
-
-    return {
-      pass,
-      name,
-      expected: args,
-      actual: issues,
-      message: () => {
-        if (this.isNot) {
-          return `${name} unexpectedly matched`;
-        }
-
-        return [`${name} failed:`, ...issues.map(formatIssue)].join("\n");
-      },
-    };
-  };
-}
+import { toHaveAlternate } from "../matchers/to-have-alternate.js";
+import { toHaveAlternateMedia } from "../matchers/to-have-alternate-media.js";
+import { toHaveAlternateType } from "../matchers/to-have-alternate-type.js";
+import { toHaveCanonical } from "../matchers/to-have-canonical.js";
+import { toHaveGoogleBotMeta } from "../matchers/to-have-googlebot-meta.js";
+import { toHaveHtmlLang } from "../matchers/to-have-html-lang.js";
+import { toHaveJsonLd } from "../matchers/to-have-jsonld.js";
+import { toHaveMetaDescription } from "../matchers/to-have-meta-description.js";
+import { toHaveMetaName } from "../matchers/to-have-meta-name.js";
+import { toHaveMetaTitle } from "../matchers/to-have-meta-title.js";
+import { toHaveOpenGraphAudio } from "../matchers/to-have-open-graph-audio.js";
+import { toHaveOpenGraphDescription } from "../matchers/to-have-open-graph-description.js";
+import { toHaveOpenGraphImage } from "../matchers/to-have-open-graph-image.js";
+import { toHaveOpenGraphImageAlt } from "../matchers/to-have-open-graph-image-alt.js";
+import { toHaveOpenGraphImageSize } from "../matchers/to-have-open-graph-image-size.js";
+import { toHaveOpenGraphLocale } from "../matchers/to-have-open-graph-locale.js";
+import { toHaveOpenGraphSiteName } from "../matchers/to-have-open-graph-site-name.js";
+import { toHaveOpenGraphTitle } from "../matchers/to-have-open-graph-title.js";
+import { toHaveOpenGraphType } from "../matchers/to-have-open-graph-type.js";
+import { toHaveOpenGraphUrl } from "../matchers/to-have-open-graph-url.js";
+import { toHaveOpenGraphVideo } from "../matchers/to-have-open-graph-video.js";
+import { toHaveRobotsMeta } from "../matchers/to-have-robots-meta.js";
+import { toHaveSelfAlternate } from "../matchers/to-have-self-alternate.js";
+import { toHaveTwitterCard } from "../matchers/to-have-twitter-card.js";
+import { toHaveTwitterCreator } from "../matchers/to-have-twitter-creator.js";
+import { toHaveTwitterDescription } from "../matchers/to-have-twitter-description.js";
+import { toHaveTwitterImage } from "../matchers/to-have-twitter-image.js";
+import { toHaveTwitterImageAlt } from "../matchers/to-have-twitter-image-alt.js";
+import { toHaveTwitterSite } from "../matchers/to-have-twitter-site.js";
+import { toHaveTwitterTitle } from "../matchers/to-have-twitter-title.js";
+import { toHaveXDefaultAlternate } from "../matchers/to-have-x-default-alternate.js";
 
 const seoditMatchers = {
-  toHaveMetaTitle: createPageMatcher<[ExpectedValue]>("toHaveMetaTitle", assertMetaTitle),
-  toHaveMetaDescription: createPageMatcher<[ExpectedValue]>("toHaveMetaDescription", assertMetaDescription),
-  toHaveMetaName: createPageMatcher<[string, ExpectedValue]>("toHaveMetaName", assertMetaName),
-  toHaveCanonical: createPageMatcher<[ExpectedValue]>("toHaveCanonical", assertCanonical),
-  toHaveSelfAlternate: createPageMatcher<[string, ExpectedValue]>("toHaveSelfAlternate", assertSelfAlternate),
-  toHaveAlternate: createPageMatcher<[string, ExpectedValue]>("toHaveAlternate", assertAlternate),
-  toHaveXDefaultAlternate: createPageMatcher<[ExpectedValue]>("toHaveXDefaultAlternate", assertXDefaultAlternate),
-  toHaveAlternateMedia: createPageMatcher<[string, ExpectedValue]>("toHaveAlternateMedia", assertAlternateMedia),
-  toHaveAlternateType: createPageMatcher<[string, ExpectedValue]>("toHaveAlternateType", assertAlternateType),
-  toHaveOpenGraphTitle: createPageMatcher<[ExpectedValue]>("toHaveOpenGraphTitle", assertOpenGraphTitle),
-  toHaveOpenGraphDescription: createPageMatcher<[ExpectedValue]>(
-    "toHaveOpenGraphDescription",
-    assertOpenGraphDescription,
-  ),
-  toHaveOpenGraphUrl: createPageMatcher<[ExpectedValue]>("toHaveOpenGraphUrl", assertOpenGraphUrl),
-  toHaveOpenGraphSiteName: createPageMatcher<[ExpectedValue]>("toHaveOpenGraphSiteName", assertOpenGraphSiteName),
-  toHaveOpenGraphType: createPageMatcher<[ExpectedValue]>("toHaveOpenGraphType", assertOpenGraphType),
-  toHaveOpenGraphLocale: createPageMatcher<[ExpectedValue]>("toHaveOpenGraphLocale", assertOpenGraphLocale),
-  toHaveOpenGraphImage: createPageMatcher<[ExpectedValue]>("toHaveOpenGraphImage", assertOpenGraphImage),
-  toHaveOpenGraphImageAlt: createPageMatcher<[ExpectedValue]>("toHaveOpenGraphImageAlt", assertOpenGraphImageAlt),
-  toHaveOpenGraphImageSize: createPageMatcher<[OpenGraphImageSizeExpectation]>(
-    "toHaveOpenGraphImageSize",
-    assertOpenGraphImageSize,
-  ),
-  toHaveOpenGraphVideo: createPageMatcher<[ExpectedValue]>("toHaveOpenGraphVideo", assertOpenGraphVideo),
-  toHaveOpenGraphAudio: createPageMatcher<[ExpectedValue]>("toHaveOpenGraphAudio", assertOpenGraphAudio),
-  toHaveTwitterCard: createPageMatcher<[ExpectedValue]>("toHaveTwitterCard", assertTwitterCard),
-  toHaveTwitterTitle: createPageMatcher<[ExpectedValue]>("toHaveTwitterTitle", assertTwitterTitle),
-  toHaveTwitterDescription: createPageMatcher<[ExpectedValue]>("toHaveTwitterDescription", assertTwitterDescription),
-  toHaveTwitterImage: createPageMatcher<[ExpectedValue]>("toHaveTwitterImage", assertTwitterImage),
-  toHaveTwitterImageAlt: createPageMatcher<[ExpectedValue]>("toHaveTwitterImageAlt", assertTwitterImageAlt),
-  toHaveTwitterSite: createPageMatcher<[ExpectedValue]>("toHaveTwitterSite", assertTwitterSite),
-  toHaveTwitterCreator: createPageMatcher<[ExpectedValue]>("toHaveTwitterCreator", assertTwitterCreator),
-  toHaveRobotsMeta: createPageMatcher<[RobotsMetaExpectation]>("toHaveRobotsMeta", assertRobotsMeta),
-  toHaveGoogleBotMeta: createPageMatcher<[RobotsMetaExpectation]>("toHaveGoogleBotMeta", assertGoogleBotMeta),
-  toHaveHtmlLang: createPageMatcher<[ExpectedValue]>("toHaveHtmlLang", assertHtmlLang),
-  toHaveValidJsonLd: createPageMatcher<[]>("toHaveValidJsonLd", assertValidJsonLd),
-  toHaveJsonLdType: createPageMatcher<[string]>("toHaveJsonLdType", assertJsonLdType),
+  toHaveMetaTitle,
+  toHaveMetaDescription,
+  toHaveMetaName,
+  toHaveCanonical,
+  toHaveSelfAlternate,
+  toHaveAlternate,
+  toHaveXDefaultAlternate,
+  toHaveAlternateMedia,
+  toHaveAlternateType,
+  toHaveOpenGraphTitle,
+  toHaveOpenGraphDescription,
+  toHaveOpenGraphUrl,
+  toHaveOpenGraphSiteName,
+  toHaveOpenGraphType,
+  toHaveOpenGraphLocale,
+  toHaveOpenGraphImage,
+  toHaveOpenGraphImageAlt,
+  toHaveOpenGraphImageSize,
+  toHaveOpenGraphVideo,
+  toHaveOpenGraphAudio,
+  toHaveTwitterCard,
+  toHaveTwitterTitle,
+  toHaveTwitterDescription,
+  toHaveTwitterImage,
+  toHaveTwitterImageAlt,
+  toHaveTwitterSite,
+  toHaveTwitterCreator,
+  toHaveRobotsMeta,
+  toHaveGoogleBotMeta,
+  toHaveHtmlLang,
+  toHaveJsonLd,
 };
 
 export type SeoditMatchers = typeof seoditMatchers;
+
+export const seoditMatcherNames = Object.keys(seoditMatchers) as (keyof SeoditMatchers)[];
 
 type ExtendableExpect = {
   extend(matchers: SeoditMatchers): unknown;
@@ -139,37 +78,36 @@ export function extendSeoditExpect<TExpect extends ExtendableExpect>(baseExpect:
 
 declare module "@playwright/test" {
   interface Matchers<R, T = unknown> {
-    toHaveMetaTitle(expected: ExpectedValue): Promise<R>;
-    toHaveMetaDescription(expected: ExpectedValue): Promise<R>;
-    toHaveMetaName(name: string, expected: ExpectedValue): Promise<R>;
-    toHaveCanonical(expected: ExpectedValue): Promise<R>;
-    toHaveSelfAlternate(locale: string, expected: ExpectedValue): Promise<R>;
-    toHaveAlternate(hreflang: string, expected: ExpectedValue): Promise<R>;
-    toHaveXDefaultAlternate(expected: ExpectedValue): Promise<R>;
-    toHaveAlternateMedia(media: string, expected: ExpectedValue): Promise<R>;
-    toHaveAlternateType(type: string, expected: ExpectedValue): Promise<R>;
-    toHaveOpenGraphTitle(expected: ExpectedValue): Promise<R>;
-    toHaveOpenGraphDescription(expected: ExpectedValue): Promise<R>;
-    toHaveOpenGraphUrl(expected: ExpectedValue): Promise<R>;
-    toHaveOpenGraphSiteName(expected: ExpectedValue): Promise<R>;
-    toHaveOpenGraphType(expected: ExpectedValue): Promise<R>;
-    toHaveOpenGraphLocale(expected: ExpectedValue): Promise<R>;
-    toHaveOpenGraphImage(expected: ExpectedValue): Promise<R>;
-    toHaveOpenGraphImageAlt(expected: ExpectedValue): Promise<R>;
-    toHaveOpenGraphImageSize(expected: OpenGraphImageSizeExpectation): Promise<R>;
-    toHaveOpenGraphVideo(expected: ExpectedValue): Promise<R>;
-    toHaveOpenGraphAudio(expected: ExpectedValue): Promise<R>;
-    toHaveTwitterCard(expected: ExpectedValue): Promise<R>;
-    toHaveTwitterTitle(expected: ExpectedValue): Promise<R>;
-    toHaveTwitterDescription(expected: ExpectedValue): Promise<R>;
-    toHaveTwitterImage(expected: ExpectedValue): Promise<R>;
-    toHaveTwitterImageAlt(expected: ExpectedValue): Promise<R>;
-    toHaveTwitterSite(expected: ExpectedValue): Promise<R>;
-    toHaveTwitterCreator(expected: ExpectedValue): Promise<R>;
-    toHaveRobotsMeta(expected: RobotsMetaExpectation): Promise<R>;
-    toHaveGoogleBotMeta(expected: RobotsMetaExpectation): Promise<R>;
-    toHaveHtmlLang(expected: ExpectedValue): Promise<R>;
-    toHaveValidJsonLd(): Promise<R>;
-    toHaveJsonLdType(expectedType: string): Promise<R>;
+    toHaveMetaTitle(expected: string | RegExp): Promise<R>;
+    toHaveMetaDescription(expected: string | RegExp): Promise<R>;
+    toHaveMetaName(name: string, expected: string | RegExp): Promise<R>;
+    toHaveCanonical(expected: string | RegExp): Promise<R>;
+    toHaveSelfAlternate(locale: string, expected: string | RegExp): Promise<R>;
+    toHaveAlternate(hreflang: string, expected: string | RegExp): Promise<R>;
+    toHaveXDefaultAlternate(expected: string | RegExp): Promise<R>;
+    toHaveAlternateMedia(media: string, expected: string | RegExp): Promise<R>;
+    toHaveAlternateType(type: string, expected: string | RegExp): Promise<R>;
+    toHaveOpenGraphTitle(expected: string | RegExp): Promise<R>;
+    toHaveOpenGraphDescription(expected: string | RegExp): Promise<R>;
+    toHaveOpenGraphUrl(expected: string | RegExp): Promise<R>;
+    toHaveOpenGraphSiteName(expected: string | RegExp): Promise<R>;
+    toHaveOpenGraphType(expected: string | RegExp): Promise<R>;
+    toHaveOpenGraphLocale(expected: string | RegExp): Promise<R>;
+    toHaveOpenGraphImage(expected: string | RegExp): Promise<R>;
+    toHaveOpenGraphImageAlt(expected: string | RegExp): Promise<R>;
+    toHaveOpenGraphImageSize(expected: { width?: number | string; height?: number | string }): Promise<R>;
+    toHaveOpenGraphVideo(expected: string | RegExp): Promise<R>;
+    toHaveOpenGraphAudio(expected: string | RegExp): Promise<R>;
+    toHaveTwitterCard(expected: string | RegExp): Promise<R>;
+    toHaveTwitterTitle(expected: string | RegExp): Promise<R>;
+    toHaveTwitterDescription(expected: string | RegExp): Promise<R>;
+    toHaveTwitterImage(expected: string | RegExp): Promise<R>;
+    toHaveTwitterImageAlt(expected: string | RegExp): Promise<R>;
+    toHaveTwitterSite(expected: string | RegExp): Promise<R>;
+    toHaveTwitterCreator(expected: string | RegExp): Promise<R>;
+    toHaveRobotsMeta(expected: { index?: boolean; follow?: boolean }): Promise<R>;
+    toHaveGoogleBotMeta(expected: { index?: boolean; follow?: boolean }): Promise<R>;
+    toHaveHtmlLang(expected: string | RegExp): Promise<R>;
+    toHaveJsonLd(expected: Record<string, unknown>): Promise<R>;
   }
 }
