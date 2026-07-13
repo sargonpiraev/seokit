@@ -1,0 +1,69 @@
+{
+  "name": "@sargonpiraev/seokit",
+  "description": "Playwright SEO matchers for Next.js + next-intl apps",
+  "version": "0.8.0",
+  "private": false,
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sargonpiraev/seokit.git",
+    "directory": "packages/seokit"
+  },
+  "files": [
+    "dist",
+    "skills"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./next": {
+      "types": "./dist/next/index.d.ts",
+      "default": "./dist/next/index.js"
+    },
+    "./playwright": {
+      "types": "./dist/playwright/index.d.ts",
+      "default": "./dist/playwright/index.js"
+    }
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsx scripts/readme-gen.ts && tsc",
+    "prepare": "test -f dist/playwright/index.js || npm run build",
+    "check-types": "tsc --noEmit",
+    "test": "node --import tsx --test \"src/**/*.test.ts\"",
+    "test:next": "npm test -w seokit-example",
+    "readme:gen": "tsx scripts/readme-gen.ts",
+    "skill:init": "mkdir -p skills && cd skills && npx skills init seokit",
+    "release:dry-run": "semantic-release --dry-run"
+  },
+  "peerDependencies": {
+    "@playwright/test": ">=1.51.0"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@repo/typescript-config": "*",
+    "@types/node": "^25.5.0",
+    "tsx": "^4.21.0",
+    "typescript": "5.9.2"
+  },
+  "homepage": "https://sargonpiraev.github.io/seokit/docs",
+  "llms": "https://sargonpiraev.github.io/seokit/llms.txt",
+  "llmsFull": "https://sargonpiraev.github.io/seokit/llms-full.txt",
+  "skills": "https://github.com/sargonpiraev/seokit/tree/main/packages/seokit/skills/seokit",
+  "agents": {
+    "skills": [
+      {
+        "name": "seokit",
+        "path": "./skills/seokit"
+      }
+    ]
+  }
+}

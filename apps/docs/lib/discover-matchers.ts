@@ -9,7 +9,7 @@ export type DocumentedMatcher = {
   path: string
 }
 
-const packageSrc = path.join(path.dirname(fileURLToPath(import.meta.url)), '../../../packages/seodit/src')
+const packageSrc = path.join(path.dirname(fileURLToPath(import.meta.url)), '../../../packages/seokit/src')
 const matchersRoot = path.join(packageSrc, 'matchers')
 
 function normalizeDocComment(doc: string): string {

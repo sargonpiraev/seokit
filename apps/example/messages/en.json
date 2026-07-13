@@ -1,7 +1,7 @@
 {
   "home": {
-    "title": "Seodit Example",
-    "description": "Minimal Next.js fixture for @sargonpiraev/seodit/next"
+    "title": "Seokit Example",
+    "description": "Minimal Next.js fixture for @sargonpiraev/seokit/next"
   },
   "products": {
     "title": "Products",

@@ -10,7 +10,7 @@ import { defineConfig, defineDocs } from "fumadocs-mdx/config";
 var rootDir = path.join(path.dirname(fileURLToPath(import.meta.url)), "../..");
 var generator = createGenerator({
   cache: createFileSystemGeneratorCache(".next/fumadocs-typescript"),
-  tsconfigPath: path.join(rootDir, "packages/seodit/tsconfig.json")
+  tsconfigPath: path.join(rootDir, "packages/seokit/tsconfig.json")
 });
 var docs = defineDocs({
   dir: "content/docs",

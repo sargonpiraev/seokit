@@ -5,8 +5,8 @@ export const FIXTURE_PRODUCT = {
     ru: "Пример товара",
   },
   descriptions: {
-    en: "A minimal fixture product for the seodit example app.",
-    ru: "Минимальный товар-фикстура для примера seodit.",
+    en: "A minimal fixture product for the seokit example app.",
+    ru: "Минимальный товар-фикстура для примера seokit.",
   },
 } as const;
 

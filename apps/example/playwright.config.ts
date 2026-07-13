@@ -4,7 +4,7 @@ const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:4100";
 
 export default defineConfig({
   testDir: ".",
-  testMatch: "**/*.seodit.spec.ts",
+  testMatch: "**/*.seokit.spec.ts",
   fullyParallel: false,
   workers: 1,
   timeout: 60_000,

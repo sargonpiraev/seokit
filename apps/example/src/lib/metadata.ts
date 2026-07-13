@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { routing } from "@/i18n/routing";
 
-export const SITE_NAME = "Seodit Example";
+export const SITE_NAME = "Seokit Example";
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:4100";
 
 function pageUrl(locale: string, pagePath = "") {

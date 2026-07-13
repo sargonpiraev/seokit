@@ -24,7 +24,7 @@ const config = {
   images: {
     unoptimized: true,
   },
-  transpilePackages: ['@sargonpiraev/seodit'],
+  transpilePackages: ['@sargonpiraev/seokit'],
   outputFileTracingRoot: path.join(__dirname, '../..'),
   webpack: (webpackConfig, { dev }) => {
     webpackConfig.resolve.alias = {

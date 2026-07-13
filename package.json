@@ -1,5 +1,5 @@
 {
-  "name": "seodit",
+  "name": "seokit",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -7,7 +7,7 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
-    "test": "npm test -w @sargonpiraev/seodit",
+    "test": "npm test -w @sargonpiraev/seokit",
     "prepare": "lefthook install"
   },
   "devDependencies": {

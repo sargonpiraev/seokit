@@ -24,7 +24,7 @@ export async function generateMetadata({
   return {
     metadataBase,
     title: SITE_NAME,
-    description: "Minimal Next.js fixture for @sargonpiraev/seodit/next",
+    description: "Minimal Next.js fixture for @sargonpiraev/seokit/next",
     openGraph: {
       siteName: SITE_NAME,
       url: `/${locale}`,

@@ -1,23 +1,23 @@
 ---
 title: Getting started
-description: Install seodit and write your first colocated SEO spec
+description: Install seokit and write your first colocated SEO spec
 ---
 
 ## 1. Install
 
 ```bash
-npm install @sargonpiraev/seodit @playwright/test
+npm install @sargonpiraev/seokit @playwright/test
 ```
 
 ## 2. Extend
 
-Create `src/test/seodit.ts`:
+Create `src/test/seokit.ts`:
 
 ```typescript
 import { expect as baseExpect, test } from "@playwright/test";
-import { extendSeoditExpect } from "@sargonpiraev/seodit";
+import { extendSeokitExpect } from "@sargonpiraev/seokit";
 
-const expect = extendSeoditExpect(baseExpect);
+const expect = extendSeokitExpect(baseExpect);
 
 export { test, expect };
 ```
@@ -35,7 +35,7 @@ export default defineConfig({
   testDir: "./src",
   projects: [
     { name: "app", testMatch: "**/*.test.ts" },
-    { name: "seodit", testMatch: "**/*.seodit.spec.ts" },
+    { name: "seokit", testMatch: "**/*.seokit.spec.ts" },
   ],
   use: {
     baseURL: process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:3000",
@@ -44,18 +44,18 @@ export default defineConfig({
 ```
 
 ```bash
-npx playwright test --project seodit
+npx playwright test --project seokit
 ```
 
 ## 4. First colocated spec
 
 Place the spec next to the page, for example:
 
-`src/app/[locale]/products/[id]/page.seodit.spec.ts`
+`src/app/[locale]/products/[id]/page.seokit.spec.ts`
 
 ```typescript
 import { routing } from "@/i18n/routing";
-import { test, expect } from "@/test/seodit";
+import { test, expect } from "@/test/seokit";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 const id = "alpha";
@@ -91,4 +91,4 @@ The example above does three things:
 
 See all matchers in [Matchers](/docs/matchers).
 
-Working example: [`apps/example`](https://github.com/sargonpiraev/seodit/tree/main/apps/example).
+Working example: [`apps/example`](https://github.com/sargonpiraev/seokit/tree/main/apps/example).

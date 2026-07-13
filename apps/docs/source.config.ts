@@ -11,7 +11,7 @@ const rootDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '../..')
 
 const generator = createGenerator({
   cache: createFileSystemGeneratorCache('.next/fumadocs-typescript'),
-  tsconfigPath: path.join(rootDir, 'packages/seodit/tsconfig.json'),
+  tsconfigPath: path.join(rootDir, 'packages/seokit/tsconfig.json'),
 })
 
 export const docs = defineDocs({

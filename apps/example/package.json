@@ -1,5 +1,5 @@
 {
-  "name": "seodit-example",
+  "name": "seokit-example",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -11,7 +11,7 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "@sargonpiraev/seodit": "*",
+    "@sargonpiraev/seokit": "*",
     "next": "16.2.9",
     "next-intl": "^4.13.1",
     "react": "19.2.4",

@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   ci:
-    uses: sargonpiraev/ci/.github/workflows/on-push-main-seodit.yml@main
+    uses: sargonpiraev/ci/.github/workflows/on-push-main-seokit.yml@main
     secrets: inherit
     permissions:
       contents: write

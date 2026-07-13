@@ -1,5 +1,5 @@
 {
-  "name": "seodit-docs",
+  "name": "seokit-docs",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
     "check-types": "npm run generate:matcher-docs && fumadocs-mdx && next typegen && tsc --noEmit"
   },
   "dependencies": {
-    "@sargonpiraev/seodit": "*",
+    "@sargonpiraev/seokit": "*",
     "fumadocs-core": "^16.10.5",
     "fumadocs-mdx": "^15.0.12",
     "fumadocs-typescript": "^5.2.6",

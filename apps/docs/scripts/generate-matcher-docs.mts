@@ -10,7 +10,7 @@ import {
 
 const docsRoot = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const contentRoot = path.join(docsRoot, 'content/docs/matchers')
-const packageSrc = path.join(docsRoot, '../../packages/seodit/src')
+const packageSrc = path.join(docsRoot, '../../packages/seokit/src')
 
 function readMatcherSource(entry: DocumentedMatcher) {
   return readFileSync(path.join(packageSrc, entry.path), 'utf-8')
@@ -33,7 +33,7 @@ title: ${yamlString(entry.title)}
 description: ${yamlString(description)}
 ---
 
-{/* generated from packages/seodit/src/${entry.path} */}
+{/* generated from packages/seokit/src/${entry.path} */}
 
 <MatcherDoc name="${entry.matcher}" path="${entry.path}" />
 `
