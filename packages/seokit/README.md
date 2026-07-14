@@ -15,6 +15,13 @@ Playwright SEO matchers for Next.js — toHaveMetadata and toHaveJsonLd
 npm install @sargonpiraev/seokit @playwright/test
 ```
 
+Formerly published as `@sargonpiraev/seodit` — same API, new package name:
+
+```bash
+npm uninstall @sargonpiraev/seodit
+npm install @sargonpiraev/seokit @playwright/test
+```
+
 ## Quick start
 
 ```typescript

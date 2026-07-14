@@ -50,14 +50,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v6
-        with:
-          node-version: "24"
-          cache: npm
-          cache-dependency-path: package-lock.json
-          registry-url: https://registry.npmjs.org
-
-      - run: npm ci
+      - uses: sargonpiraev/ci/.github/actions/setup-node-npm-ci@main
 
       - run: npm run build
         working-directory: packages/seokit

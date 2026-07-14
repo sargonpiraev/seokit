@@ -23,6 +23,12 @@ npm run check-types
 
 Example `npm test` builds Next first (needs network for PokeAPI on cold cache).
 
+## npm rename (`seodit` → `seokit`)
+
+Registry names are immutable. Publish `@sargonpiraev/seokit`, then deprecate `@sargonpiraev/seodit`.
+Trusted Publisher on npmjs.com must target package `@sargonpiraev/seokit`, repo `sargonpiraev/seokit`, workflow `on-push-main.yml`.
+Do not set `registry-url` on `setup-node` in the publish job (breaks OIDC).
+
 ## Commits & release
 
 Use Conventional Commits with scope **`seokit`** so `semantic-release` publishes:

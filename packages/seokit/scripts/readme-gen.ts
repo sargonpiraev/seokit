@@ -64,6 +64,13 @@ ${packageJson.description}
 npm install ${npmName} @playwright/test
 \`\`\`
 
+Formerly published as \`@sargonpiraev/seodit\` — same API, new package name:
+
+\`\`\`bash
+npm uninstall @sargonpiraev/seodit
+npm install ${npmName} @playwright/test
+\`\`\`
+
 ## Quick start
 
 \`\`\`typescript
