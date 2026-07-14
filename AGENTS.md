@@ -16,7 +16,7 @@ Node: `>=24 <25` (see root `package.json` `engines`).
 
 ```bash
 npm test                         # package unit tests
-npm run test:next -w @sargonpiraev/seokit   # example build + Playwright
+npm run test:example -w @sargonpiraev/seokit   # example build + Playwright
 npm run build -w @sargonpiraev/seokit
 npm run check-types
 ```

@@ -44,7 +44,7 @@
     "check-types": "tsc --noEmit",
     "lint": "tsc --noEmit",
     "test": "node --import tsx --test \"src/**/*.test.ts\"",
-    "test:next": "npm test -w seokit-example",
+    "test:example": "npm test -w seokit-example",
     "readme:gen": "tsx scripts/readme-gen.ts",
     "skill:init": "mkdir -p skills && cd skills && npx skills init seokit",
     "release:dry-run": "semantic-release --dry-run"
