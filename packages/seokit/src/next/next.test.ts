@@ -75,34 +75,27 @@ describe("createSeokitPageRoutes", () => {
       buildDir: fixtureDir,
       origin: "http://localhost:3000",
     });
-    const calls: string[] = [];
+    const calls: unknown[] = [];
     const expect: SeokitRouteBasicsExpect = () => ({
-      async toHaveHtmlLang(expected) {
-        calls.push(`lang:${expected}`);
-      },
-      async toHaveCanonical(expected) {
-        calls.push(`canonical:${expected}`);
-      },
-      async toHaveSelfAlternate(locale, expected) {
-        calls.push(`self:${locale}:${expected}`);
-      },
-      async toHaveXDefaultAlternate(expected) {
-        calls.push(`x-default:${expected}`);
-      },
-      async toHaveAlternate(locale, expected) {
-        calls.push(`alternate:${locale}:${expected}`);
+      async toHaveMetadata(expected) {
+        calls.push(expected);
       },
     });
 
     await assertSeokitRouteBasics(expect, {} as never, route!);
 
     assert.deepEqual(calls, [
-      "lang:en",
-      "canonical:http://localhost:3000/en/products",
-      "self:en:http://localhost:3000/en/products",
-      "x-default:http://localhost:3000/en/products",
-      "alternate:en:http://localhost:3000/en/products",
-      "alternate:ru:http://localhost:3000/ru/products",
+      {
+        lang: "en",
+        alternates: {
+          canonical: "http://localhost:3000/en/products",
+          languages: {
+            "x-default": "http://localhost:3000/en/products",
+            en: "http://localhost:3000/en/products",
+            ru: "http://localhost:3000/ru/products",
+          },
+        },
+      },
     ]);
   });
 });

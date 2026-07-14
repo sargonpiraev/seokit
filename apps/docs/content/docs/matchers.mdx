@@ -1,0 +1,62 @@
+---
+title: Matchers
+description: Page SEO matchers
+---
+
+Both matchers take an `expected` value. seokit extracts the actual value from the page and deep-partial compares. Strings may be `RegExp`.
+
+## `toHaveMetadata`
+
+Extracts a Next.js-like metadata object from HTML and compares.
+
+```typescript
+await expect(page).toHaveMetadata({
+  lang: "en",
+  title: "Acme",
+  description: /tools/,
+  alternates: {
+    canonical: "https://example.com/en",
+    languages: {
+      en: "https://example.com/en",
+      eo: "https://example.com/eo",
+      "x-default": "https://example.com/en",
+    },
+  },
+  robots: { index: true, follow: true },
+});
+```
+
+| Field | Source |
+| --- | --- |
+| `lang` | `<html lang>` |
+| `title` | `<title>` |
+| `description` | `<meta name="description">` |
+| `alternates.canonical` | `<link rel="canonical">` |
+| `alternates.languages` | `<link rel="alternate" hreflang>` map |
+| `robots` | `<meta name="robots">` → `{ index, follow }` |
+
+`lang` is an extension — it is not part of Next.js `Metadata`, but is required for i18n pages.
+
+Open Graph / Twitter cards are **not** extracted yet — assert them with Playwright locators if needed.
+
+## `toHaveJsonLd`
+
+```typescript
+await expect(page).toHaveJsonLd("Organization");
+await expect(page).toHaveJsonLd([{ "@type": "Product", name: "Widget" }]);
+```
+
+Accepts `@type` string(s) and/or deep-partial JSON-LD object(s). Arrays are matched order-independently (each expected item must match some actual entity). `@graph` entries are flattened.
+
+## Not in seokit
+
+Use Playwright for HTTP checks:
+
+```typescript
+const response = await page.goto("/en");
+expect(response?.ok()).toBeTruthy();
+expect(response?.status()).toBe(200);
+expect(response?.headers()["content-type"]).toMatch(/text\/html/);
+```
+
+robots.txt / sitemaps: use `request.get(...)` and assert the body (see the [example app](https://github.com/sargonpiraev/seokit/blob/main/apps/example/src/app/app.seokit.spec.ts)).

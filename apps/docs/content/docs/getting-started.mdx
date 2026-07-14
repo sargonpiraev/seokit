@@ -1,6 +1,6 @@
 ---
 title: Getting started
-description: Install seokit and write your first colocated SEO spec
+description: Wire the Playwright matchers and write a first SEO spec
 ---
 
 ## 1. Install
@@ -9,7 +9,7 @@ description: Install seokit and write your first colocated SEO spec
 npm install @sargonpiraev/seokit @playwright/test
 ```
 
-## 2. Extend
+## 2. Extend expect
 
 Create `src/test/seokit.ts`:
 
@@ -22,21 +22,16 @@ const expect = extendSeokitExpect(baseExpect);
 export { test, expect };
 ```
 
-Import `test` and `expect` from this file in every SEO spec — not from `@playwright/test` directly.
+Import `test` / `expect` from this file in SEO specs — not from `@playwright/test` directly.
 
 ## 3. Playwright project
-
-In `playwright.config.ts`, keep SEO specs in their own project:
 
 ```typescript
 import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
   testDir: "./src",
-  projects: [
-    { name: "app", testMatch: "**/*.test.ts" },
-    { name: "seokit", testMatch: "**/*.seokit.spec.ts" },
-  ],
+  testMatch: "**/*.seokit.spec.ts",
   use: {
     baseURL: process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:3000",
   },
@@ -44,51 +39,49 @@ export default defineConfig({
 ```
 
 ```bash
-npx playwright test --project seokit
+npx playwright test
 ```
 
-## 4. First colocated spec
+## 4. First spec
 
-Place the spec next to the page, for example:
+Colocate next to the page, e.g. `src/app/[locale]/page.seokit.spec.ts`.
 
-`src/app/[locale]/products/[id]/page.seokit.spec.ts`
+Recommended pattern: known locales × known URLs, with expectations in a test-only fixture file (not imported by the app):
 
 ```typescript
-import { routing } from "@/i18n/routing";
 import { test, expect } from "@/test/seokit";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-const id = "alpha";
+const LOCALES = ["en", "de", "fr"] as const;
 
-for (const locale of routing.locales) {
-  const pageUrl = new URL(`/${locale}/products/${id}`, siteUrl).toString();
+for (const locale of LOCALES) {
+  test(`/${locale}`, async ({ page }) => {
+    const response = await page.goto(`/${locale}`);
+    expect(response?.ok()).toBeTruthy();
 
-  test(pageUrl, async ({ page }) => {
-    await page.goto(pageUrl);
+    await expect(page).toHaveMetadata({
+      lang: locale,
+      title: /.+/,
+      description: /.+/,
+      alternates: {
+        canonical: `https://example.com/${locale}`,
+        languages: {
+          en: "https://example.com/en",
+          de: "https://example.com/de",
+          fr: "https://example.com/fr",
+          "x-default": "https://example.com/en",
+        },
+      },
+    });
 
-    await expect(page).toHaveHtmlLang(locale);
-    await expect(page).toHaveCanonical(pageUrl);
-    await expect(page).toHaveSelfAlternate(locale, pageUrl);
-
-    const xDefaultUrl = new URL(`/${routing.defaultLocale}/products/${id}`, siteUrl).toString();
-    await expect(page).toHaveXDefaultAlternate(xDefaultUrl);
-
-    for (const alternateLocale of routing.locales) {
-      const alternateUrl = new URL(`/${alternateLocale}/products/${id}`, siteUrl).toString();
-      await expect(page).toHaveAlternate(alternateLocale, alternateUrl);
-    }
+    await expect(page).toHaveJsonLd([{ "@type": "Organization" }]);
   });
 }
 ```
 
-## 5. How it works
+See the [example app](https://github.com/sargonpiraev/seokit/tree/main/apps/example) (`src/test/seo-fixtures.ts` + colocated `*.seokit.spec.ts`).
 
-The example above does three things:
+Full matcher reference: [Matchers](/docs/matchers).
 
-1. **`routing.locales`** — iterate the same next-intl locale list your app already uses.
-2. **`id`** — dynamic segments are just values you pass in the spec (`"1"`).
-3. **Matchers** — assert against absolute URLs built with `new URL(..., siteUrl)`. The same `pageUrl` is the test title and what you pass to `page.goto`.
+## Optional: Next route helpers
 
-See all matchers in [Matchers](/docs/matchers).
-
-Working example: [`apps/example`](https://github.com/sargonpiraev/seokit/tree/main/apps/example).
+`@sargonpiraev/seokit/next` also exports `createSeokitPageRoutes` / `assertSeokitRouteBasics` for next-intl route matrices driven by the Next build manifest. They need a prior `next build`. The example app uses the simpler fixture loops above; helpers are covered by package unit tests under `packages/seokit/src/next/`.

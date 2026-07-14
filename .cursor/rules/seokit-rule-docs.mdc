@@ -1,0 +1,22 @@
+---
+description: seokit docs and matcher API conventions
+globs: apps/docs/**/*,packages/seokit/src/**/*
+alwaysApply: false
+---
+
+# seokit docs
+
+Public API is two Playwright matchers:
+
+- `toHaveMetadata`
+- `toHaveJsonLd`
+
+Document them in `apps/docs/content/docs/matchers.mdx`.
+
+Each matcher extracts an actual value and deep-partial compares to `expected` (strings may be `RegExp`).
+
+## Do not
+
+- Reintroduce a public rule registry / per-rule MDX pages
+- Add response/robots.txt/sitemap matchers unless explicitly requested (use Playwright for HTTP)
+- Add Open Graph / Twitter as first-class matchers unless explicitly requested

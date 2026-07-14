@@ -1,9 +1,6 @@
-import { execSync, spawn } from "node:child_process";
+import { spawn } from "node:child_process";
 
-execSync("npx next build --webpack", {
-  stdio: "inherit",
-});
-
+/** App is built by `npm test` before Playwright starts the server. */
 const child = spawn("npx", ["next", "start", "-p", "4100"], {
   stdio: "inherit",
 });

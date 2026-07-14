@@ -1,8 +1,9 @@
 {
   "name": "@sargonpiraev/seokit",
-  "description": "Playwright SEO matchers for Next.js + next-intl apps",
+  "description": "Playwright SEO matchers for Next.js — toHaveMetadata and toHaveJsonLd",
   "version": "0.8.0",
   "private": false,
+  "license": "MIT",
   "type": "module",
   "publishConfig": {
     "access": "public"
@@ -14,7 +15,9 @@
   },
   "files": [
     "dist",
-    "skills"
+    "skills",
+    "README.md",
+    "LICENSE"
   ],
   "exports": {
     ".": {
@@ -28,13 +31,18 @@
     "./playwright": {
       "types": "./dist/playwright/index.d.ts",
       "default": "./dist/playwright/index.js"
+    },
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "default": "./dist/core/index.js"
     }
   },
   "scripts": {
     "dev": "tsc --watch",
-    "build": "tsx scripts/readme-gen.ts && tsc",
+    "build": "rm -rf dist && tsx scripts/readme-gen.ts && tsc",
     "prepare": "test -f dist/playwright/index.js || npm run build",
     "check-types": "tsc --noEmit",
+    "lint": "tsc --noEmit",
     "test": "node --import tsx --test \"src/**/*.test.ts\"",
     "test:next": "npm test -w seokit-example",
     "readme:gen": "tsx scripts/readme-gen.ts",

@@ -1,13 +1,61 @@
 {
+  "nav": {
+    "pokemon": "Pokémon",
+    "types": "Types",
+    "generations": "Generations",
+    "locales": "Change language"
+  },
   "home": {
-    "title": "Seokit Example",
-    "description": "Minimal Next.js fixture for @sargonpiraev/seokit/next"
+    "title": "Pokédex",
+    "description": "Explore Pokémon entries, types, and generations in one place.",
+    "cta": "Browse Pokédex",
+    "featured": "Featured",
+    "starters": "Kanto starters",
+    "types": "Types",
+    "generations": "Generations",
+    "viewAll": "View all Pokémon",
+    "viewAllTypes": "View all types",
+    "viewAllGenerations": "View all generations",
+    "learnMore": "View entry"
   },
-  "products": {
-    "title": "Products",
-    "description": "Browse products in the example catalog"
+  "pokemon": {
+    "title": "Pokémon",
+    "description": "Browse and filter the Pokédex catalog.",
+    "homeCrumb": "Home",
+    "detailDescription": "{name} — Pokédex entry",
+    "searchPlaceholder": "Search by name…",
+    "empty": "No Pokémon match your filters.",
+    "backToList": "Back to list",
+    "types": "Types",
+    "generation": "Generation",
+    "filterType": "Type",
+    "filterGeneration": "Generation",
+    "filterAll": "All",
+    "generationLabel": "Generation {gen}"
   },
-  "detail": {
-    "title": "Example product"
+  "types": {
+    "title": "Types",
+    "description": "Browse elemental types and the Pokémon that share them.",
+    "homeCrumb": "Home",
+    "detailDescription": "{name} type — strengths, weaknesses, and Pokémon.",
+    "backToList": "Back to types",
+    "pokemonCount": "{count} Pokémon",
+    "strongAgainst": "Strong against",
+    "weakAgainst": "Weak against",
+    "pokemon": "Pokémon",
+    "emptyPokemon": "No Pokémon of this type in the catalog.",
+    "none": "None in this catalog"
+  },
+  "generations": {
+    "title": "Generations",
+    "description": "Browse Pokémon generations and their main regions.",
+    "homeCrumb": "Home",
+    "detailDescription": "{name} — Pokémon and types from this era.",
+    "backToList": "Back to generations",
+    "region": "Region: {region}",
+    "types": "Types",
+    "pokemon": "Pokémon",
+    "emptyPokemon": "No Pokémon from this generation in the catalog.",
+    "none": "None in this catalog"
   }
 }

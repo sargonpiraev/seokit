@@ -1,10 +1,42 @@
 ---
 title: Overview
-description: Playwright SEO matchers for Next.js + next-intl apps
+description: Playwright SEO matchers for Next.js apps
 ---
 
-**seokit** is a Playwright extension with SEO matchers for Next.js apps that use next-intl.
+**seokit** adds two Playwright matchers for page SEO contracts:
 
-Colocate `page.seokit.spec.ts` next to a route, loop your next-intl `routing.locales`, and assert canonical, hreflang, Open Graph, Twitter, robots, and JSON-LD with granular `toHave*` matchers.
+| Matcher | What it does |
+| --- | --- |
+| `toHaveMetadata` | HTML → Next-like metadata object → compare |
+| `toHaveJsonLd` | JSON-LD scripts → compare |
 
-Start with [Getting started](/docs/getting-started).
+```typescript
+await expect(page).toHaveMetadata({
+  lang: "en",
+  title: /Acme/,
+  description: /.+/,
+  alternates: {
+    canonical: "https://example.com/en",
+    languages: {
+      en: "https://example.com/en",
+      "x-default": "https://example.com/en",
+    },
+  },
+  robots: { index: true, follow: true },
+});
+
+await expect(page).toHaveJsonLd([{ "@type": "Organization" }]);
+```
+
+## In scope / out of scope
+
+| In seokit | Use Playwright directly |
+| --- | --- |
+| Page metadata (title, description, canonical, hreflang, robots meta) | `response?.ok()`, status, headers |
+| JSON-LD on HTML pages | `robots.txt` / sitemap XML (see example `app.seokit.spec.ts`) |
+
+## Next
+
+- [Getting started](/docs/getting-started)
+- [Matchers](/docs/matchers)
+- [Skill](/docs/skill)

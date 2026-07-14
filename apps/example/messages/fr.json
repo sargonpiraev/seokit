@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "pokemon": "Pokémon",
+    "types": "Types",
+    "generations": "Générations",
+    "locales": "Changer de langue"
+  },
+  "home": {
+    "title": "Pokédex",
+    "description": "Explorez les fiches, types et générations de Pokémon.",
+    "cta": "Parcourir le Pokédex",
+    "featured": "À la une",
+    "starters": "Starters de Kanto",
+    "types": "Types",
+    "generations": "Générations",
+    "viewAll": "Voir tous les Pokémon",
+    "viewAllTypes": "Voir tous les types",
+    "viewAllGenerations": "Voir toutes les générations",
+    "learnMore": "Voir la fiche"
+  },
+  "pokemon": {
+    "title": "Pokémon",
+    "description": "Parcourez et filtrez le catalogue du Pokédex.",
+    "homeCrumb": "Accueil",
+    "detailDescription": "{name} — fiche Pokédex",
+    "searchPlaceholder": "Rechercher par nom…",
+    "empty": "Aucun Pokémon ne correspond.",
+    "backToList": "Retour à la liste",
+    "types": "Types",
+    "generation": "Génération",
+    "filterType": "Type",
+    "filterGeneration": "Génération",
+    "filterAll": "Tous",
+    "generationLabel": "Génération {gen}"
+  },
+  "types": {
+    "title": "Types",
+    "description": "Parcourez les types élémentaires et les Pokémon associés.",
+    "homeCrumb": "Accueil",
+    "detailDescription": "Type {name} — forces, faiblesses et Pokémon.",
+    "backToList": "Retour aux types",
+    "pokemonCount": "{count} Pokémon",
+    "strongAgainst": "Fort contre",
+    "weakAgainst": "Faible contre",
+    "pokemon": "Pokémon",
+    "emptyPokemon": "Aucun Pokémon de ce type dans le catalogue.",
+    "none": "Aucun dans ce catalogue"
+  },
+  "generations": {
+    "title": "Générations",
+    "description": "Parcourez les générations de Pokémon et leurs régions.",
+    "homeCrumb": "Accueil",
+    "detailDescription": "{name} — Pokémon et types de cette ère.",
+    "backToList": "Retour aux générations",
+    "region": "Région : {region}",
+    "types": "Types",
+    "pokemon": "Pokémon",
+    "emptyPokemon": "Aucun Pokémon de cette génération dans le catalogue.",
+    "none": "Aucun dans ce catalogue"
+  }
+}

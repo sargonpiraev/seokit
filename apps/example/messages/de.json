@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "pokemon": "Pokémon",
+    "types": "Typen",
+    "generations": "Generationen",
+    "locales": "Sprache ändern"
+  },
+  "home": {
+    "title": "Pokédex",
+    "description": "Entdecke Pokémon-Einträge, Typen und Generationen an einem Ort.",
+    "cta": "Pokédex öffnen",
+    "featured": "Empfohlen",
+    "starters": "Kanto-Starter",
+    "types": "Typen",
+    "generations": "Generationen",
+    "viewAll": "Alle Pokémon",
+    "viewAllTypes": "Alle Typen",
+    "viewAllGenerations": "Alle Generationen",
+    "learnMore": "Eintrag ansehen"
+  },
+  "pokemon": {
+    "title": "Pokémon",
+    "description": "Durchsuche und filtere den Pokédex.",
+    "homeCrumb": "Startseite",
+    "detailDescription": "{name} — Pokédex-Eintrag",
+    "searchPlaceholder": "Nach Name suchen…",
+    "empty": "Keine Pokémon gefunden.",
+    "backToList": "Zurück zur Liste",
+    "types": "Typen",
+    "generation": "Generation",
+    "filterType": "Typ",
+    "filterGeneration": "Generation",
+    "filterAll": "Alle",
+    "generationLabel": "Generation {gen}"
+  },
+  "types": {
+    "title": "Typen",
+    "description": "Entdecke Elementtypen und die Pokémon, die sie teilen.",
+    "homeCrumb": "Startseite",
+    "detailDescription": "Typ {name} — Stärken, Schwächen und Pokémon.",
+    "backToList": "Zurück zu den Typen",
+    "pokemonCount": "{count} Pokémon",
+    "strongAgainst": "Stark gegen",
+    "weakAgainst": "Schwach gegen",
+    "pokemon": "Pokémon",
+    "emptyPokemon": "Keine Pokémon dieses Typs im Katalog.",
+    "none": "Keine in diesem Katalog"
+  },
+  "generations": {
+    "title": "Generationen",
+    "description": "Entdecke Pokémon-Generationen und ihre Hauptregionen.",
+    "homeCrumb": "Startseite",
+    "detailDescription": "{name} — Pokémon und Typen dieser Ära.",
+    "backToList": "Zurück zu den Generationen",
+    "region": "Region: {region}",
+    "types": "Typen",
+    "pokemon": "Pokémon",
+    "emptyPokemon": "Keine Pokémon dieser Generation im Katalog.",
+    "none": "Keine in diesem Katalog"
+  }
+}

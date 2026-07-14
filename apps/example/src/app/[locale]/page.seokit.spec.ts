@@ -1,24 +1,35 @@
-import { assertSeokitRouteBasics, createSeokitPageRoutes } from "@sargonpiraev/seokit";
-
-import { routing } from "@/i18n/routing";
-import { SITE_NAME, SITE_URL } from "@/lib/metadata";
 import { expect, test } from "@/test/seokit";
+import {
+  home,
+  hreflangLanguages,
+  LOCALES,
+  ORIGIN,
+  pathname,
+  SITE_NAME,
+} from "@/test/seo-fixtures";
 
-const routes = createSeokitPageRoutes(routing, import.meta.url, {
-  origin: SITE_URL,
-});
+for (const locale of LOCALES) {
+  test(`${pathname(locale)} SEO`, async ({ page }) => {
+    const path = pathname(locale);
+    const response = await page.goto(path);
+    expect(response?.ok()).toBeTruthy();
 
-for (const route of routes) {
-  test(route.pathname, async ({ page }) => {
-    await page.goto(route.pathname);
+    const copy = home[locale];
 
-    await assertSeokitRouteBasics(expect, page, route);
-    await expect(page).toHaveMetaTitle(/.+/);
-    await expect(page).toHaveMetaDescription(/.+/);
-    await expect(page).toHaveOpenGraphUrl(route.absoluteUrl());
-    await expect(page).toHaveOpenGraphSiteName(SITE_NAME);
-    await expect(page).toHaveOpenGraphType("website");
-    await expect(page).toHaveTwitterCard("summary_large_image");
-    await expect(page).toHaveJsonLd({ "@type": "Organization" });
+    await expect(page).toHaveMetadata({
+      lang: locale,
+      title: copy.title,
+      description: copy.description,
+      alternates: {
+        canonical: `${ORIGIN}${path}`,
+        languages: hreflangLanguages(),
+      },
+    });
+
+    await expect(page).toHaveJsonLd([
+      { "@type": "Organization", name: SITE_NAME, url: ORIGIN },
+      { "@type": "WebSite", name: SITE_NAME, inLanguage: locale },
+      { "@type": "ItemList" },
+    ]);
   });
 }
