@@ -8,7 +8,7 @@
     "build": "npm run generate:rule-docs && fumadocs-mdx && next build",
     "start": "next start --port 4002",
     "check-types": "npm run generate:rule-docs && fumadocs-mdx && next typegen && tsc --noEmit",
-    "lint": "tsc --noEmit"
+    "lint": "npm run check-types"
   },
   "dependencies": {
     "@sargonpiraev/seokit": "*",
