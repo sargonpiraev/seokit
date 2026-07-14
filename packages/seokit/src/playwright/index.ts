@@ -1,24 +1,33 @@
+import type {
+  ExpectMatcherState,
+  MatcherReturnType,
+} from "@playwright/test";
 import type { JsonLdExpected } from "../core/jsonld/match.js";
 import type { MetadataExpected } from "../core/metadata/types.js";
 import { toHaveJsonLd } from "./matchers/to-have-json-ld.js";
 import { toHaveMetadata } from "./matchers/to-have-metadata.js";
 
+type SeokitMatcherFn = (
+  this: ExpectMatcherState,
+  receiver: unknown,
+  ...args: never[]
+) => MatcherReturnType | Promise<MatcherReturnType>;
+
 const seokitMatchers = {
   toHaveMetadata,
   toHaveJsonLd,
+} as unknown as {
+  toHaveMetadata: SeokitMatcherFn;
+  toHaveJsonLd: SeokitMatcherFn;
 };
 
 export type SeokitMatchers = typeof seokitMatchers;
 
 export const seokitMatcherNames = Object.keys(seokitMatchers) as (keyof SeokitMatchers)[];
 
-type ExtendableExpect = {
-  extend(matchers: SeokitMatchers): unknown;
-};
-
-export function extendSeokitExpect<TExpect extends ExtendableExpect>(
-  baseExpect: TExpect,
-): ReturnType<TExpect["extend"]> {
+export function extendSeokitExpect<TExpect extends {
+  extend: (matchers: SeokitMatchers) => unknown;
+}>(baseExpect: TExpect): ReturnType<TExpect["extend"]> {
   return baseExpect.extend(seokitMatchers) as ReturnType<TExpect["extend"]>;
 }
 

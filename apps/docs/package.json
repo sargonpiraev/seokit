@@ -16,7 +16,7 @@
     "fumadocs-mdx": "^15.0.12",
     "fumadocs-typescript": "^5.2.6",
     "fumadocs-ui": "^16.10.5",
-    "next": "^16.2.9",
+    "next": "16.2.10",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },
@@ -29,5 +29,8 @@
     "tailwindcss": "^4.1.7",
     "tsx": "^4.21.0",
     "typescript": "5.9.2"
+  },
+  "optionalDependencies": {
+    "lightningcss-linux-x64-gnu": "1.32.0"
   }
 }

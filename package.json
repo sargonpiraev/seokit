@@ -31,5 +31,8 @@
   "workspaces": [
     "packages/*",
     "apps/*"
-  ]
+  ],
+  "overrides": {
+    "next": "16.2.10"
+  }
 }

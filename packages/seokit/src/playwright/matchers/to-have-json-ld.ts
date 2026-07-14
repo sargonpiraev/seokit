@@ -1,7 +1,10 @@
-import type { Page } from "@playwright/test";
+import type { MatcherReturnType, Page } from "@playwright/test";
 import { matchJsonLd, type JsonLdExpected } from "../../core/jsonld/match.js";
 
-export async function toHaveJsonLd(page: Page, expected: JsonLdExpected) {
+export async function toHaveJsonLd(
+  page: Page,
+  expected: JsonLdExpected,
+): Promise<MatcherReturnType> {
   const scripts = await page.evaluate(() =>
     [...document.querySelectorAll('script[type="application/ld+json"]')].map(
       (script) => script.textContent ?? "",

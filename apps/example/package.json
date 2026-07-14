@@ -18,7 +18,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.24.0",
-    "next": "16.2.9",
+    "next": "16.2.10",
     "next-intl": "^4.13.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
@@ -36,6 +36,7 @@
     "typescript": "5.9.2"
   },
   "optionalDependencies": {
+    "@next/swc-linux-x64-gnu": "16.2.10",
     "@parcel/watcher-linux-x64-glibc": "2.5.6",
     "@swc/core-linux-x64-gnu": "1.15.43"
   }
