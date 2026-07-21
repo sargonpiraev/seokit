@@ -1,6 +1,6 @@
 {
   "name": "@sargonpiraev/seokit",
-  "description": "Playwright SEO matchers for Next.js — toHaveMetadata and toHaveJsonLd",
+  "description": "Two Playwright expect matchers for SEO checks — toHaveMetadata and toHaveJsonLd",
   "version": "0.8.1",
   "private": false,
   "license": "MIT",

@@ -1,13 +1,13 @@
 ---
 title: Matchers
-description: Page SEO matchers
+description: toHaveMetadata and toHaveJsonLd
 ---
 
 Both matchers take an `expected` value. seokit extracts the actual value from the page and deep-partial compares. Strings may be `RegExp`.
 
 ## `toHaveMetadata`
 
-Extracts a Next.js-like metadata object from HTML and compares.
+Extracts a metadata object from HTML and compares.
 
 ```typescript
 await expect(page).toHaveMetadata({

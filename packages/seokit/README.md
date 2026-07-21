@@ -7,7 +7,9 @@
 [![main](https://img.shields.io/github/actions/workflow/status/sargonpiraev/seokit/on-push-main.yml?branch=main&label=main)](https://github.com/sargonpiraev/seokit/actions?query=branch%3Amain)
 [![skills.sh](https://skills.sh/b/sargonpiraev/seokit)](https://skills.sh/sargonpiraev/seokit)
 
-Playwright SEO matchers for Next.js — toHaveMetadata and toHaveJsonLd
+Two Playwright expect matchers for SEO checks — toHaveMetadata and toHaveJsonLd
+
+Wire them with `extendSeokitExpect` and assert page SEO contracts in Playwright specs. That is the whole public product.
 
 ## Install
 
@@ -15,7 +17,7 @@ Playwright SEO matchers for Next.js — toHaveMetadata and toHaveJsonLd
 npm install @sargonpiraev/seokit @playwright/test
 ```
 
-Formerly published as `@sargonpiraev/seodit` — same API, new package name:
+Formerly published as `@sargonpiraev/seodit` — same matcher API, new package name:
 
 ```bash
 npm uninstall @sargonpiraev/seodit

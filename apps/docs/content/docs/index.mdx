@@ -1,13 +1,13 @@
 ---
 title: Overview
-description: Playwright SEO matchers for Next.js apps
+description: Two Playwright expect matchers for SEO checks
 ---
 
-**seokit** adds two Playwright matchers for page SEO contracts:
+**seokit** adds two Playwright matchers. Wire them with `extendSeokitExpect` and assert page SEO contracts. That is the whole product.
 
 | Matcher | What it does |
 | --- | --- |
-| `toHaveMetadata` | HTML → Next-like metadata object → compare |
+| `toHaveMetadata` | HTML → metadata object → compare |
 | `toHaveJsonLd` | JSON-LD scripts → compare |
 
 ```typescript

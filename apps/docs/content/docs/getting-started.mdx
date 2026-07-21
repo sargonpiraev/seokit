@@ -1,6 +1,6 @@
 ---
 title: Getting started
-description: Wire the Playwright matchers and write a first SEO spec
+description: Install, extend expect, write a first SEO matcher spec
 ---
 
 ## 1. Install
@@ -81,7 +81,3 @@ for (const locale of LOCALES) {
 See the [example app](https://github.com/sargonpiraev/seokit/tree/main/apps/example) (`src/test/seo-fixtures.ts` + colocated `*.seokit.spec.ts`).
 
 Full matcher reference: [Matchers](/docs/matchers).
-
-## Optional: Next route helpers
-
-`@sargonpiraev/seokit/next` also exports `createSeokitPageRoutes` / `assertSeokitRouteBasics` for next-intl route matrices driven by the Next build manifest. They need a prior `next build`. The example app uses the simpler fixture loops above; helpers are covered by package unit tests under `packages/seokit/src/next/`.
