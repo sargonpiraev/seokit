@@ -1,8 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 import type { NextcovConfig } from "nextcov";
 
-import harness from "./playwright.harness.json" with { type: "json" };
-
 type PlaywrightConfigWithNextcov = Parameters<typeof defineConfig>[0] & {
   nextcov?: NextcovConfig;
 };
@@ -10,10 +8,18 @@ type PlaywrightConfigWithNextcov = Parameters<typeof defineConfig>[0] & {
 const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:4100";
 const withCoverage = process.env.E2E_COVERAGE === "true";
 
+const projectNames = [
+  "functional",
+  "seo",
+  "analytics",
+  "visual",
+  "visual-mobile",
+] as const;
+
 export const nextcov: NextcovConfig = {
   cdpPort: 9242,
   buildDir: ".next",
-  outputDir: harness.coverage?.reportDir ?? "coverage",
+  outputDir: "coverage",
   sourceRoot: "./",
   include: ["src/**/*.{ts,tsx}"],
   exclude: ["**/*.test.ts", "**/*.spec.ts", "e2e/**"],
@@ -21,7 +27,7 @@ export const nextcov: NextcovConfig = {
   log: false,
 };
 
-const projectDevices: Record<string, (typeof devices)[string]> = {
+const projectDevices: Record<(typeof projectNames)[number], (typeof devices)[string]> = {
   functional: devices["Desktop Chrome"],
   seo: devices["Desktop Chrome"],
   analytics: devices["Desktop Chrome"],
@@ -29,7 +35,7 @@ const projectDevices: Record<string, (typeof devices)[string]> = {
   "visual-mobile": devices["Pixel 5"],
 };
 
-const testMatchByProject: Record<string, string> = {
+const testMatchByProject: Record<(typeof projectNames)[number], string> = {
   functional: "**/*.functional.spec.ts",
   seo: "**/*.seo.spec.ts",
   analytics: "**/*.analytics.spec.ts",
@@ -44,10 +50,16 @@ const config: PlaywrightConfigWithNextcov = {
   timeout: 60_000,
   retries: process.env.CI ? 1 : 0,
   reporter: [["list"], ["html", { open: "never" }]],
+  expect: {
+    toHaveScreenshot: {
+      // Linux CI AA/font rasterization can drift ~dozen pixels vs baselines.
+      maxDiffPixelRatio: 0.02,
+    },
+  },
   use: {
     baseURL,
   },
-  projects: harness.projects.map((name) => ({
+  projects: projectNames.map((name) => ({
     name,
     testMatch: testMatchByProject[name],
     use: { ...projectDevices[name] },
