@@ -16,7 +16,7 @@ jobs:
     uses: sargonpiraev/ci/.github/workflows/on-push-main.yml@main
     secrets: inherit
 
-  test-example:
+  test-webapp:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -29,16 +29,16 @@ jobs:
 
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
-        working-directory: apps/example
+        working-directory: apps/webapp
 
-      - name: Example integration tests
-        run: npm run test:example
+      - name: Webapp Playwright suites
+        run: npm run test:webapp
         working-directory: packages/seokit
         env:
           CI: true
 
   publish-npm:
-    needs: [base, test-example]
+    needs: [base, test-webapp]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -83,7 +83,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish-docs:
-    needs: [base, test-example]
+    needs: [base, test-webapp]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -101,7 +101,7 @@ jobs:
       - uses: sargonpiraev/ci/.github/actions/setup-node-npm-ci@main
 
       - name: Build static Fumadocs site
-        working-directory: apps/docs
+        working-directory: apps/docapp
         env:
           DOCS_BASE_PATH: /seokit
         run: npm run build
@@ -109,7 +109,7 @@ jobs:
       - name: Prepare GitHub Pages artifact
         run: |
           mkdir -p _pages
-          cp -r apps/docs/out/* _pages/
+          cp -r apps/docapp/out/* _pages/
           touch _pages/.nojekyll
 
       - uses: actions/upload-pages-artifact@v3

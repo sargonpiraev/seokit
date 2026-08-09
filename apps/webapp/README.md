@@ -35,7 +35,7 @@ Minimal **shadcn/ui** catalog shell:
 
 - Loop locales × known URLs; expectations live in `src/test/seo-fixtures.ts` (not app code)
 - `toHaveMetadata` / `toHaveJsonLd` per page type
-- `app.seokit.spec.ts` — robots.txt + sitemap index / urlsets via Playwright `request` (not seokit matchers)
+- `app.seo.spec.ts` — robots.txt + sitemap index / urlsets via Playwright `request` (not seokit matchers)
 - Localized titles from PokeAPI (Charmander → Glumanda / Salamèche, Fire → Feuer / Feu)
 
 ## Run
@@ -43,7 +43,7 @@ Minimal **shadcn/ui** catalog shell:
 ```bash
 npm install
 npm run build -w @sargonpiraev/seokit
-npm test -w seokit-example
+npm test -w seokit-webapp
 ```
 
 `npm test` builds the Next app first (static pages need PokeAPI at build time), then Playwright starts the server.

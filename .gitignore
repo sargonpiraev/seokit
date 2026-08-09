@@ -36,3 +36,9 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+.env.*.local
+node_modules/
+.pulumi/
+test-results/
+playwright-report/
+!.env.example

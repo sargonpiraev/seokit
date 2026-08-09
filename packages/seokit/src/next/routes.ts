@@ -9,7 +9,7 @@ import { inferRouteFromSpec } from "./manifest.js";
 const LOCALE_PARAM = "locale";
 
 /**
- * Expand colocated `page.seokit.spec.ts` into one case per next-intl locale.
+ * Expand colocated `page.seo.spec.ts` into one case per next-intl locale.
  * Pass the same `routing` object you give to next-intl.
  */
 export function createSeokitPageRoutes(

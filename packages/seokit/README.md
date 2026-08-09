@@ -68,4 +68,4 @@ npm install @sargonpiraev/seokit
 - [llms-full.txt](https://sargonpiraev.github.io/seokit/llms-full.txt)
 - [Source](https://github.com/sargonpiraev/seokit/tree/main/packages/seokit)
 - [npm](https://www.npmjs.com/package/@sargonpiraev%2fseokit)
-- [Example app](https://github.com/sargonpiraev/seokit/tree/main/apps/example)
+- [Example app](https://github.com/sargonpiraev/seokit/tree/main/apps/webapp)

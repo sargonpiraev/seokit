@@ -1,0 +1,16 @@
+{
+  "$schema": "../../../schema/app__playwright-webapp.json",
+  "app": "webapp",
+  "projects": [
+    "functional",
+    "seo",
+    "analytics",
+    "visual",
+    "visual-mobile"
+  ],
+  "coverage": {
+    "collector": "nextcov",
+    "reportDir": "coverage",
+    "thresholds": false
+  }
+}

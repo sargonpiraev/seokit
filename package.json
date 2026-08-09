@@ -11,7 +11,13 @@
     "prepare": "lefthook install",
     "test:unit": "npm test -w @sargonpiraev/seokit",
     "test:lint": "npm run lint",
-    "test:types": "npm run check-types"
+    "test:check-types": "npm run check-types",
+    "test:functional": "npm run build -w seokit-webapp && npm run test:functional -w seokit-webapp",
+    "test:seo": "npm run build -w seokit-webapp && npm run test:seo -w seokit-webapp",
+    "test:analytics": "npm run build -w seokit-webapp && npm run test:analytics -w seokit-webapp",
+    "test:spec": "npm run build -w seokit-webapp && npm run test:spec -w seokit-webapp",
+    "test:visual": "npm run build -w seokit-webapp && npm run test:visual -w seokit-webapp",
+    "test:format": "prettier --check \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
     "@commitlint/cli": "^21.2.1",

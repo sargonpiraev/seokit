@@ -14,7 +14,7 @@ export function checkSeokitSpecCoverage(
   const warnings: string[] = [];
 
   for (const route of missingSpecs) {
-    warnings.push(`Missing colocated page.seokit.spec.ts for Next page route ${route}`);
+    warnings.push(`Missing colocated page.seo.spec.ts for Next page route ${route}`);
   }
 
   for (const route of orphanSpecs) {

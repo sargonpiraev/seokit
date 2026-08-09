@@ -60,9 +60,58 @@
         "cwd": "seokit"
       }
     },
-    "test:types": {
+    "test:check-types": {
       "cache": false,
-      "command": "npm run test:types",
+      "command": "npm run test:check-types",
+      "options": {
+        "cwd": "seokit"
+      }
+    },
+    "test:functional": {
+      "cache": false,
+      "command": "npm run test:functional",
+      "options": {
+        "cwd": "seokit"
+      }
+    },
+    "test:seo": {
+      "cache": false,
+      "command": "npm run test:seo",
+      "options": {
+        "cwd": "seokit"
+      }
+    },
+    "test:analytics": {
+      "cache": false,
+      "command": "npm run test:analytics",
+      "options": {
+        "cwd": "seokit"
+      }
+    },
+    "test:spec": {
+      "cache": false,
+      "command": "npm run test:spec",
+      "options": {
+        "cwd": "seokit"
+      }
+    },
+    "test:visual": {
+      "cache": false,
+      "command": "npm run test:visual",
+      "options": {
+        "cwd": "seokit"
+      }
+    },
+    "test:format": {
+      "cache": false,
+      "command": "npm run test:format",
+      "options": {
+        "cwd": "seokit"
+      }
+    },
+    "git:status": {
+      "cache": false,
+      "command": "git status -sb",
       "options": {
         "cwd": "seokit"
       }

@@ -1,5 +1,5 @@
 {
-  "name": "seokit-example",
+  "name": "seokit-webapp",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -7,7 +7,13 @@
     "dev": "node ../../scripts/dev-next.mjs 4100",
     "build": "next build --webpack",
     "start": "next start -p 4100",
-    "test": "npm run build && playwright test",
+    "test": "npm run build && npm run test:spec && npm run test:visual",
+    "test:functional": "playwright test --project=functional",
+    "test:seo": "playwright test --project=seo",
+    "test:analytics": "playwright test --project=analytics",
+    "test:visual": "playwright test --project=visual --project=visual-mobile",
+    "test:spec": "playwright test --project=functional --project=seo --project=analytics",
+    "test:spec:cov": "E2E_COVERAGE=true npm run test:spec",
     "check-types": "tsc --noEmit",
     "lint": "tsc --noEmit"
   },
@@ -33,6 +39,7 @@
     "@types/node": "^25.5.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "nextcov": "^1.5.1",
     "typescript": "5.9.2"
   },
   "optionalDependencies": {

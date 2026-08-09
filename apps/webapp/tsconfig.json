@@ -8,8 +8,12 @@
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": [
     "node_modules",
-    "**/*.seokit.spec.ts",
+    "**/*.seo.spec.ts",
+    "**/*.functional.spec.ts",
+    "**/*.analytics.spec.ts",
+    "**/*.visual.spec.ts",
     "playwright.config.ts",
+    "e2e/**",
     "src/test/**"
   ]
 }

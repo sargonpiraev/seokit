@@ -1,14 +1,14 @@
 # seokit
 
-Two Playwright expect matchers for SEO checks (`toHaveMetadata`, `toHaveJsonLd`) via `extendSeokitExpect`. Example Next.js app + Fumadocs site support the package; they are not part of the public product surface.
+Two Playwright expect matchers for SEO checks (`toHaveMetadata`, `toHaveJsonLd`) via `extendSeokitExpect`. Demo `apps/webapp` + Fumadocs `apps/docapp` support the package; they are not part of the public product surface. Playwright harness lives on `webapp` (eslint glob); `docapp` is docs-only / no harness yet.
 
 ## Workspaces
 
 | Path | npm name | Role |
 | --- | --- | --- |
 | `packages/seokit` | `@sargonpiraev/seokit` | published library (matchers) |
-| `apps/example` | `seokit-example` | demo + Playwright SEO specs |
-| `apps/docs` | `seokit-docs` | Fumadocs docs (GitHub Pages) |
+| `apps/webapp` | `seokit-webapp` | demo + Playwright SEO specs |
+| `apps/docapp` | `seokit-docapp` | Fumadocs docs (GitHub Pages) |
 
 Node: `>=24 <25` (see root `package.json` `engines`).
 
@@ -22,12 +22,12 @@ Subpaths `@sargonpiraev/seokit/next` and `@sargonpiraev/seokit/core` exist for i
 
 ```bash
 npm test                         # package unit tests
-npm run test:example -w @sargonpiraev/seokit   # example build + Playwright
+npm run test:webapp -w @sargonpiraev/seokit   # webapp build + Playwright suites
 npm run build -w @sargonpiraev/seokit
 npm run check-types
 ```
 
-Example `npm test` builds Next first (needs network for PokeAPI on cold cache).
+Webapp `npm test` builds Next first (needs network for PokeAPI on cold cache).
 
 ## npm rename (`seodit` → `seokit`)
 
@@ -50,9 +50,9 @@ Other scopes do **not** trigger a release (`packages/seokit/release.config.cjs`)
 
 ## Specs pattern (example)
 
-- Colocate `*.seokit.spec.ts` next to pages
-- Locales × known URLs; expectations in `apps/example/src/test/seo-fixtures.ts` (not app imports)
-- robots/sitemaps: Playwright `request` in `apps/example/src/app/app.seokit.spec.ts` (not library matchers)
+- Colocate `*.seo.spec.ts` next to pages
+- Locales × known URLs; expectations in `apps/webapp/src/test/seo-fixtures.ts` (not app imports)
+- robots/sitemaps: Playwright `request` in `apps/webapp/src/app/app.seo.spec.ts` (not library matchers)
 
 ## Build hygiene
 

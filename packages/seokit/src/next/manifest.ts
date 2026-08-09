@@ -5,6 +5,12 @@ import type { InferRouteFromSpecOptions, ReadNextPageRoutesOptions } from "./typ
 
 const RESERVED_PAGE_ROUTES = new Set(["/_not-found", "/_global-error"]);
 
+/** Colocated SEO Playwright specs next to `page.tsx` (`*.seo.spec.ts` preferred). */
+const PAGE_SEO_SPEC_SUFFIXES = ["/page.seo.spec.ts", "/page.seokit.spec.ts"] as const;
+const PAGE_SEO_SPEC_FILENAMES = new Set(
+  PAGE_SEO_SPEC_SUFFIXES.map((suffix) => suffix.slice(1)),
+);
+
 export function getAppPathRoutesManifestPath(buildDir = ".next"): string {
   return path.join(buildDir, "app-path-routes-manifest.json");
 }
@@ -44,9 +50,10 @@ export function specFileToManifestKey(specFilePath: string, appDir = "src/app"):
   if (index === -1) return undefined;
 
   const relativePath = normalizedSpec.slice(index + marker.length);
-  if (!relativePath.endsWith("/page.seokit.spec.ts")) return undefined;
+  const suffix = PAGE_SEO_SPEC_SUFFIXES.find((candidate) => relativePath.endsWith(candidate));
+  if (!suffix) return undefined;
 
-  const routeDir = relativePath.slice(0, -"/page.seokit.spec.ts".length);
+  const routeDir = relativePath.slice(0, -suffix.length);
   return routeDir ? `/${routeDir}/page` : "/page";
 }
 
@@ -89,7 +96,7 @@ export function discoverSeokitSpecRoutes(projectRoot: string, appDir = "src/app"
         continue;
       }
 
-      if (entry.name !== "page.seokit.spec.ts") continue;
+      if (!PAGE_SEO_SPEC_FILENAMES.has(entry.name)) continue;
 
       const manifestKey = specFileToManifestKey(fullPath, appDir);
       if (!manifestKey) continue;
