@@ -18,6 +18,10 @@ jobs:
 
   test-webapp:
     runs-on: ubuntu-latest
+    # Keep in sync with scripts/pw-visual-docker.sh (@playwright/test version → image tag).
+    container:
+      image: mcr.microsoft.com/playwright:v1.61.1-jammy
+      options: --user 1001
     steps:
       - uses: actions/checkout@v6
 
@@ -27,15 +31,12 @@ jobs:
         run: npm run build
         working-directory: packages/seokit
 
-      - name: Install Playwright browser
-        run: npx playwright install --with-deps chromium
-        working-directory: apps/webapp
-
       - name: Webapp Playwright suites
         run: npm run test:webapp
         working-directory: packages/seokit
         env:
           CI: true
+          PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
 
   publish-npm:
     needs: [base, test-webapp]

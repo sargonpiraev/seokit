@@ -17,6 +17,7 @@
     "test:analytics": "npm run build -w seokit-webapp && npm run test:analytics -w seokit-webapp",
     "test:spec": "npm run build -w seokit-webapp && npm run test:spec -w seokit-webapp",
     "test:visual": "npm run build -w seokit-webapp && npm run test:visual -w seokit-webapp",
+    "test:visual:update": "bash scripts/pw-visual-docker.sh",
     "test:format": "prettier --check \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {

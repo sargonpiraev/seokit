@@ -25,9 +25,16 @@ npm test                         # package unit tests
 npm run test:webapp -w @sargonpiraev/seokit   # webapp build + Playwright suites
 npm run build -w @sargonpiraev/seokit
 npm run check-types
+npm run test:visual:update       # Linux visual baselines via Playwright Docker (CI image)
 ```
 
 Webapp `npm test` builds Next first (needs network for PokeAPI on cold cache).
+
+## Visual baselines
+
+CI (`test-webapp`) runs in `mcr.microsoft.com/playwright:v{playwright}-jammy` (see `.github/workflows/on-push-main.yml`).
+
+Update screenshots with `npm run test:visual:update` (`scripts/pw-visual-docker.sh`) — not bare macOS Playwright — so committed `*-linux.png` match CI. Bump the workflow image tag when `@playwright/test` changes.
 
 ## npm rename (`seodit` → `seokit`)
 
