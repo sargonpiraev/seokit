@@ -102,6 +102,13 @@
         "cwd": "seokit"
       }
     },
+    "test:cwv": {
+      "cache": false,
+      "command": "npm run test:cwv",
+      "options": {
+        "cwd": "seokit"
+      }
+    },
     "test:format": {
       "cache": false,
       "command": "npm run test:format",
