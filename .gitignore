@@ -42,3 +42,7 @@ node_modules/
 test-results/
 playwright-report/
 !.env.example
+
+# Lefthook personal overrides (optional; never commit)
+lefthook-local.yml
+lefthook-local.yaml
