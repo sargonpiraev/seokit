@@ -51,7 +51,7 @@
     "apps/*"
   ],
   "overrides": {
-    "next": "16.2.10"
+    "next": "16.2.11"
   },
   "$schema": "./node_modules/@sargonpiraev/eslint-config/build/schemas/project__package.json",
   "allowScripts": {
