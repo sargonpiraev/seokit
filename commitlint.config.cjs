@@ -1,6 +1,6 @@
 module.exports = {
-  extends: ["@commitlint/config-conventional"],
+  extends: ['@sargonpiraev/commitlint-config'],
   rules: {
-    "body-max-line-length": [0],
+    'body-max-line-length': [0],
   },
-};
+}
