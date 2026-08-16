@@ -1,7 +1,7 @@
 {
   "name": "@sargonpiraev/seokit",
   "description": "Two Playwright expect matchers for SEO checks — toHaveMetadata and toHaveJsonLd",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "private": false,
   "license": "MIT",
   "type": "module",
