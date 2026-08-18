@@ -1,59 +1,59 @@
 {
+  "$schema": "./node_modules/@sargonpiraev/eslint-config/build/schemas/project__package.json",
   "name": "seokit",
   "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
-    "test": "npm test -w @sargonpiraev/seokit",
+    "dev": "turbo run dev",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "turbo run lint",
     "prepare": "lefthook install",
-    "test:unit": "npm test -w @sargonpiraev/seokit",
-    "test:lint": "npm run lint",
-    "test:check-types": "npm run check-types",
-    "test:functional": "npm run build -w seokit-webapp && npm run test:functional -w seokit-webapp",
-    "test:seo": "npm run build -w seokit-webapp && npm run test:seo -w seokit-webapp",
+    "test": "npm test -w @sargonpiraev/seokit",
+    "test:alint": "alint check",
     "test:analytics": "npm run build -w seokit-webapp && npm run test:analytics -w seokit-webapp",
-    "test:spec": "npm run build -w seokit-webapp && npm run test:spec -w seokit-webapp",
-    "test:visual": "npm run build -w seokit-webapp && npm run test:visual -w seokit-webapp",
-    "test:visual:update": "bash scripts/pw-visual-docker.sh",
+    "test:check-types": "npm run check-types",
     "test:cwv": "npm run build -w seokit-webapp && npm run test:cwv -w seokit-webapp",
     "test:format": "prettier --check \"**/*.{ts,tsx,md}\"",
-    "test:alint": "alint check"
+    "test:functional": "npm run build -w seokit-webapp && npm run test:functional -w seokit-webapp",
+    "test:lint": "npm run lint",
+    "test:seo": "npm run build -w seokit-webapp && npm run test:seo -w seokit-webapp",
+    "test:spec": "npm run build -w seokit-webapp && npm run test:spec -w seokit-webapp",
+    "test:unit": "npm test -w @sargonpiraev/seokit",
+    "test:visual": "npm run build -w seokit-webapp && npm run test:visual -w seokit-webapp",
+    "test:visual:update": "bash scripts/pw-visual-docker.sh"
+  },
+  "overrides": {
+    "next": "16.2.11"
   },
   "devDependencies": {
     "@asamarts/alint": "^0.14.2",
-    "@commitlint/cli": "^21.2.1",
-    "@sargonpiraev/commitlint-config": "^1.0.0",
-    "@sargonpiraev/eslint-config": "^1.6.0",
-    "@sargonpiraev/prettier-config": "^1.0.0",
-    "@sargonpiraev/tsconfig": "^1.0.0",
+    "@commitlint/cli": "21.2.2",
+    "@sargonpiraev/commitlint-config": "1.2.0",
+    "@sargonpiraev/eslint-config": "1.8.0",
+    "@sargonpiraev/prettier-config": "1.3.0",
+    "@sargonpiraev/tsconfig": "1.2.0",
     "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^12.0.2",
     "@semantic-release/npm": "^13.1.3",
     "@semantic-release/release-notes-generator": "^14.1.0",
-    "eslint": "^9.26.0",
+    "eslint": "9.39.5",
     "eslint-plugin-json-schema-validator": "^6.3.1",
-    "lefthook": "^2.1.9",
-    "prettier": "^3.9.6",
+    "lefthook": "2.1.10",
+    "prettier": "3.9.6",
     "semantic-release": "^25.0.2",
     "turbo": "^2.10.3",
     "typescript": "5.9.2"
   },
+  "packageManager": "npm@10.9.4",
   "engines": {
     "node": ">=24 <25"
   },
-  "packageManager": "npm@10.9.4",
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
-  "overrides": {
-    "next": "16.2.11"
-  },
-  "$schema": "./node_modules/@sargonpiraev/eslint-config/build/schemas/project__package.json",
   "allowScripts": {
     "@asamarts/alint@0.14.2": true
   }
