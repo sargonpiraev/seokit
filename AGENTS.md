@@ -4,13 +4,13 @@ Two Playwright expect matchers for SEO checks (`toHaveMetadata`, `toHaveJsonLd`)
 
 ## Workspaces
 
-| Path | npm name | Role |
-| --- | --- | --- |
+| Path              | npm name               | Role                         |
+| ----------------- | ---------------------- | ---------------------------- |
 | `packages/seokit` | `@sargonpiraev/seokit` | published library (matchers) |
-| `apps/webapp` | `seokit-webapp` | demo + Playwright SEO specs |
-| `apps/docapp` | `seokit-docapp` | Fumadocs docs (GitHub Pages) |
+| `apps/webapp`     | `seokit-webapp`        | demo + Playwright SEO specs  |
+| `apps/docapp`     | `seokit-docapp`        | Fumadocs docs (GitHub Pages) |
 
-Node: `>=24 <25` (see root `package.json` `engines`).
+Node: `>=22` (portfolio `.nvmrc` / `engines` — same as other projects).
 
 ## Public API
 

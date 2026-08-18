@@ -53,9 +53,9 @@
         "cwd": "seokit"
       }
     },
-    "test:lint": {
+    "test:eslint": {
       "cache": false,
-      "command": "npm run test:lint",
+      "command": "npm run test:eslint",
       "options": {
         "cwd": "seokit"
       }
