@@ -129,6 +129,13 @@
       "options": {
         "cwd": "seokit"
       }
+    },
+    "test:pulumi": {
+      "cache": false,
+      "command": "npm run test:pulumi",
+      "options": {
+        "cwd": "seokit"
+      }
     }
   }
 }

@@ -25,7 +25,8 @@
     "test:spec": "npm run build -w seokit-webapp && npm run test:spec -w seokit-webapp",
     "test:unit": "npm test -w @sargonpiraev/seokit",
     "test:visual": "npm run build -w seokit-webapp && npm run test:visual -w seokit-webapp",
-    "test:visual:update": "bash scripts/pw-visual-docker.sh"
+    "test:visual:update": "bash scripts/pw-visual-docker.sh",
+    "test:pulumi": "node -e \"console.log('noop test:pulumi'); process.exit(0)\""
   },
   "overrides": {
     "next": "16.2.11"
