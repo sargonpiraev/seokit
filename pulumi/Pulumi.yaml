@@ -1,0 +1,7 @@
+name: seokit-infra
+runtime:
+  name: nodejs
+  options:
+    typescript: false
+    nodeargs: "--import tsx/esm"
+description: seokit infrastructure

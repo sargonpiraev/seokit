@@ -13,6 +13,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo run lint",
     "prepare": "lefthook install",
+    "pulumi:preview": "npm --prefix pulumi run preview",
+    "pulumi:up": "npm --prefix pulumi run up",
     "test": "npm test -w @sargonpiraev/seokit",
     "test:alint": "alint check",
     "test:analytics": "npm run build -w seokit-webapp && npm run test:analytics -w seokit-webapp",
@@ -26,7 +28,7 @@
     "test:unit": "npm test -w @sargonpiraev/seokit",
     "test:visual": "npm run build -w seokit-webapp && npm run test:visual -w seokit-webapp",
     "test:visual:update": "bash scripts/pw-visual-docker.sh",
-    "test:pulumi": "node -e \"console.log('noop test:pulumi'); process.exit(0)\""
+    "test:pulumi": "npm ci --prefix pulumi && npm --prefix pulumi run test:pulumi"
   },
   "overrides": {
     "next": "16.2.11"
