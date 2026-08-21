@@ -15,7 +15,7 @@
     "prepare": "lefthook install",
     "pulumi:preview": "npm --prefix pulumi run preview",
     "pulumi:up": "npm --prefix pulumi run up",
-    "test": "npm test -w @sargonpiraev/seokit",
+    "test": "npm test -w @sargonpiraev/seokit && npm run test:pulumi",
     "test:alint": "alint check",
     "test:analytics": "npm run build -w seokit-webapp && npm run test:analytics -w seokit-webapp",
     "test:check-types": "npm run check-types",
