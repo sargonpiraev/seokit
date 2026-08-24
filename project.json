@@ -123,9 +123,16 @@
         "cwd": "seokit"
       }
     },
-    "test:alint": {
+    "test:fslint": {
       "cache": false,
-      "command": "npm run test:alint",
+      "command": "npm run test:fslint",
+      "options": {
+        "cwd": "seokit"
+      }
+    },
+    "test:configlint": {
+      "cache": false,
+      "command": "npm run test:configlint",
       "options": {
         "cwd": "seokit"
       }
