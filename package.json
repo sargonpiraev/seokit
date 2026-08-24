@@ -27,8 +27,8 @@
     "test:seo": "npm run build -w seokit-webapp && npm run test:seo -w seokit-webapp",
     "test:spec": "npm run build -w seokit-webapp && npm run test:spec -w seokit-webapp",
     "test:unit": "npm test -w @sargonpiraev/seokit",
-    "test:visual": "npm run build -w seokit-webapp && npm run test:visual -w seokit-webapp",
-    "test:visual:update": "bash scripts/pw-visual-docker.sh",
+    "test:visual": "bash scripts/pw-visual-docker.sh",
+    "test:visual:update": "bash scripts/pw-visual-docker.sh --update-snapshots",
     "test:pulumi": "npm ci --prefix pulumi && npm --prefix pulumi run test:pulumi"
   },
   "overrides": {

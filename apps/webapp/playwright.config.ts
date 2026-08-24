@@ -21,6 +21,8 @@ export const nextcov: NextcovConfig = {
 
 const config: PlaywrightConfigWithNextcov = {
   testDir: ".",
+  snapshotPathTemplate:
+    "{testDir}/{testFilePath}-snapshots/{arg}{-project}-linux{ext}",
   fullyParallel: false,
   workers: 1,
   timeout: 60_000,
