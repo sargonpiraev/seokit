@@ -73,3 +73,16 @@ export async function installCwvCollectors(page: Page): Promise<void> {
 export async function readCwvMetrics(page: Page): Promise<CwvMetrics> {
   return page.evaluate(() => window.__cwv!);
 }
+
+/** Wait until Event Timing has attributed at least one INP interaction. */
+export async function waitForInpSample(
+  page: Page,
+  timeoutMs = 15_000,
+): Promise<CwvMetrics> {
+  await page.waitForFunction(
+    () => window.__cwv != null && window.__cwv.inp != null,
+    undefined,
+    { timeout: timeoutMs },
+  );
+  return readCwvMetrics(page);
+}
