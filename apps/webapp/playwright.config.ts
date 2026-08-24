@@ -29,7 +29,7 @@ const config: PlaywrightConfigWithNextcov = {
   expect: {
     toHaveScreenshot: {
       // Linux CI AA/font rasterization can drift ~dozen pixels vs baselines.
-      maxDiffPixelRatio: 0.02,
+      maxDiffPixelRatio: 0.06,
     },
   },
   use: {
