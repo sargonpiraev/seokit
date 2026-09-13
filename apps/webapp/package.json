@@ -4,19 +4,19 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node ../../scripts/dev-next.mjs 4100",
     "build": "next build --webpack",
+    "check-types": "tsc --noEmit",
+    "dev": "node ../../scripts/dev-next.mjs 4100",
+    "lint": "tsc --noEmit",
     "start": "next start -p 4100",
     "test": "npm run build && npm run test:spec && npm run test:spec:visual",
     "test:spec": "playwright test --grep '@feat|@seokit|@analytics'",
+    "test:spec:analytics": "playwright test --grep @analytics",
     "test:spec:cov": "E2E_COVERAGE=true npm run test:spec",
-    "check-types": "tsc --noEmit",
-    "lint": "tsc --noEmit",
     "test:spec:feat": "playwright test --grep @feat",
-    "test:spec:seokit": "playwright test --grep @seokit",
     "test:spec:perf": "playwright test --grep @perf",
-    "test:spec:visual": "playwright test --grep @visual",
-    "test:spec:analytics": "playwright test --grep @analytics"
+    "test:spec:seokit": "playwright test --grep @seokit",
+    "test:spec:visual": "playwright test --grep @visual"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
@@ -38,14 +38,14 @@
   "devDependencies": {
     "@playwright/test": "^1.61.1",
     "@repo/typescript-config": "*",
+    "@types/jest": "^30.0.0",
     "@types/node": "^25.5.0",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.4",
-    "nextcov": "^1.5.1",
-    "typescript": "5.9.2",
     "jest": "^30.4.2",
+    "nextcov": "^1.5.1",
     "ts-jest": "^29.4.11",
-    "@types/jest": "^30.0.0"
+    "typescript": "5.9.2"
   },
   "optionalDependencies": {
     "@next/swc-linux-x64-gnu": "16.2.10",

@@ -4,11 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "preview": "pulumi preview",
-    "up": "pulumi up --yes",
     "destroy": "pulumi destroy --yes",
     "postinstall": "node ./scripts/ensure-pulumi-provider-server.mjs",
-    "test:pulumi": "tsx --test webapp.test.ts index-clusters.test.ts"
+    "preview": "pulumi preview",
+    "test:pulumi": "tsx --test webapp.test.ts index-clusters.test.ts",
+    "up": "pulumi up --yes"
   },
   "dependencies": {
     "@pulumi/gcp": "^9.34.1",

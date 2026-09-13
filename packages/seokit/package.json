@@ -1,24 +1,16 @@
 {
   "name": "@sargonpiraev/seokit",
-  "description": "Two Playwright expect matchers for SEO checks — toHaveMetadata and toHaveJsonLd",
   "version": "0.22.0",
   "private": false,
-  "license": "MIT",
-  "type": "module",
-  "publishConfig": {
-    "access": "public"
-  },
+  "description": "Two Playwright expect matchers for SEO checks — toHaveMetadata and toHaveJsonLd",
+  "homepage": "https://sargonpiraev.github.io/seokit/docs",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sargonpiraev/seokit.git",
     "directory": "packages/seokit"
   },
-  "files": [
-    "dist",
-    "skills",
-    "README.md",
-    "LICENSE"
-  ],
+  "license": "MIT",
+  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -37,17 +29,34 @@
       "default": "./dist/core/index.js"
     }
   },
+  "files": [
+    "dist",
+    "skills",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "dev": "tsc --watch",
     "build": "rm -rf dist && tsx scripts/readme-gen.ts && tsc",
-    "prepare": "test -f dist/playwright/index.js || npm run build",
     "check-types": "tsc --noEmit",
+    "dev": "tsc --watch",
     "lint": "tsc --noEmit",
-    "test": "node --import tsx --test \"src/**/*.test.ts\"",
-    "test:webapp": "npm test -w seokit-webapp",
+    "prepare": "test -f dist/playwright/index.js || npm run build",
     "readme:gen": "tsx scripts/readme-gen.ts",
+    "release:dry-run": "semantic-release --dry-run",
     "skill:init": "mkdir -p skills && cd skills && npx skills init seokit",
-    "release:dry-run": "semantic-release --dry-run"
+    "test": "node --import tsx --test \"src/**/*.test.ts\"",
+    "test:unit": "node --experimental-vm-modules ../../node_modules/jest/bin/jest.js",
+    "test:webapp": "npm test -w seokit-webapp"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@repo/typescript-config": "*",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.5.0",
+    "jest": "^30.4.2",
+    "ts-jest": "^29.4.11",
+    "tsx": "^4.21.0",
+    "typescript": "5.9.2"
   },
   "peerDependencies": {
     "@playwright/test": ">=1.51.0"
@@ -55,17 +64,9 @@
   "engines": {
     "node": ">=24 <25"
   },
-  "devDependencies": {
-    "@playwright/test": "^1.61.1",
-    "@repo/typescript-config": "*",
-    "@types/node": "^25.5.0",
-    "tsx": "^4.21.0",
-    "typescript": "5.9.2"
+  "publishConfig": {
+    "access": "public"
   },
-  "homepage": "https://sargonpiraev.github.io/seokit/docs",
-  "llms": "https://sargonpiraev.github.io/seokit/llms.txt",
-  "llmsFull": "https://sargonpiraev.github.io/seokit/llms-full.txt",
-  "skills": "https://github.com/sargonpiraev/seokit/tree/main/packages/seokit/skills/seokit",
   "agents": {
     "skills": [
       {
@@ -73,5 +74,8 @@
         "path": "./skills/seokit"
       }
     ]
-  }
+  },
+  "llms": "https://sargonpiraev.github.io/seokit/llms.txt",
+  "llmsFull": "https://sargonpiraev.github.io/seokit/llms-full.txt",
+  "skills": "https://github.com/sargonpiraev/seokit/tree/main/packages/seokit/skills/seokit"
 }

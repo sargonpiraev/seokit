@@ -12,7 +12,7 @@ const create = server<
   import('fumadocs-mdx/runtime/types').InternalTypeConfig & {
     DocData: {}
   }
->()
+>({ doc: { passthroughs: ['extractedReferences'] } })
 
 export const docs = await create.docs(
   'docs',

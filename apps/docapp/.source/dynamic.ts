@@ -7,4 +7,8 @@ const create = await dynamic<
   import('fumadocs-mdx/runtime/types').InternalTypeConfig & {
     DocData: {}
   }
->(Config, { environment: 'dynamic', root: '', configPath: 'source.config.ts', outDir: '.source' })
+>(
+  Config,
+  { configPath: 'source.config.ts', environment: 'next', outDir: '.source' },
+  { doc: { passthroughs: ['extractedReferences'] } }
+)
