@@ -1,58 +1,50 @@
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import Image from 'next/image'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
-import { JsonLd } from "@/components/json-ld";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { routing } from "@/i18n/routing";
-import { breadcrumbJsonLd, thingJsonLd } from "@/lib/json-ld";
-import { absolutePageUrl, buildPageMetadata } from "@/lib/metadata";
-import { DEMO_POKEMON, getPokemon, isDemoPokemon } from "@/lib/pokeapi";
-import { cn } from "@/lib/utils";
+import { JsonLd } from '@/components/json-ld'
+import { Badge } from '@/components/ui/badge'
+import { buttonVariants } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { routing } from '@/i18n/routing'
+import { breadcrumbJsonLd, thingJsonLd } from '@/lib/json-ld'
+import { absolutePageUrl, buildPageMetadata } from '@/lib/metadata'
+import { DEMO_POKEMON, getPokemon, isDemoPokemon } from '@/lib/pokeapi'
+import { cn } from '@/lib/utils'
 
 type PokemonDetailPageProps = {
-  params: Promise<{ locale: string; name: string }>;
-};
+  params: Promise<{ locale: string; name: string }>
+}
 
 export function generateStaticParams() {
-  return routing.locales.flatMap((locale) =>
-    DEMO_POKEMON.map((name) => ({ locale, name })),
-  );
+  return routing.locales.flatMap((locale) => DEMO_POKEMON.map((name) => ({ locale, name })))
 }
 
 export async function generateMetadata({ params }: PokemonDetailPageProps) {
-  const { locale, name } = await params;
-  if (!isDemoPokemon(name)) return {};
+  const { locale, name } = await params
+  if (!isDemoPokemon(name)) return {}
 
-  const pokemon = await getPokemon(name, locale);
-  const t = await getTranslations({ locale, namespace: "pokemon" });
+  const pokemon = await getPokemon(name, locale)
+  const t = await getTranslations({ locale, namespace: 'pokemon' })
 
   return buildPageMetadata({
     locale,
     path: `pokemon/${name}`,
     title: pokemon.name,
-    description: t("detailDescription", { name: pokemon.name }),
+    description: t('detailDescription', { name: pokemon.name }),
     image: pokemon.imageUrl,
-  });
+  })
 }
 
 export default async function PokemonDetailPage({ params }: PokemonDetailPageProps) {
-  const { locale, name } = await params;
-  if (!isDemoPokemon(name)) notFound();
+  const { locale, name } = await params
+  if (!isDemoPokemon(name)) notFound()
 
-  setRequestLocale(locale);
-  const pokemon = await getPokemon(name, locale);
-  const t = await getTranslations("pokemon");
-  const pageUrl = absolutePageUrl(locale, `pokemon/${name}`);
+  setRequestLocale(locale)
+  const pokemon = await getPokemon(name, locale)
+  const t = await getTranslations('pokemon')
+  const pageUrl = absolutePageUrl(locale, `pokemon/${name}`)
 
   return (
     <main className="space-y-6">
@@ -65,8 +57,8 @@ export default async function PokemonDetailPage({ params }: PokemonDetailPagePro
             image: pokemon.imageUrl,
           }),
           breadcrumbJsonLd([
-            { name: t("homeCrumb"), locale, path: "" },
-            { name: t("title"), locale, path: "pokemon" },
+            { name: t('homeCrumb'), locale, path: '' },
+            { name: t('title'), locale, path: 'pokemon' },
             { name: pokemon.name, url: pageUrl },
           ]),
         ]}
@@ -74,9 +66,9 @@ export default async function PokemonDetailPage({ params }: PokemonDetailPagePro
 
       <Link
         href={`/${locale}/pokemon`}
-        className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "-ml-2")}
+        className={cn(buttonVariants({ variant: 'ghost', size: 'sm' }), '-ml-2')}
       >
-        ← {t("backToList")}
+        ← {t('backToList')}
       </Link>
 
       <Card>
@@ -100,17 +92,17 @@ export default async function PokemonDetailPage({ params }: PokemonDetailPagePro
           <div className="space-y-4">
             <p className="text-muted-foreground leading-relaxed">{pokemon.description}</p>
             <div className="space-y-2">
-              <p className="text-sm font-medium">{t("generation")}</p>
+              <p className="text-sm font-medium">{t('generation')}</p>
               <Link href={`/${locale}/generations/${pokemon.generation}`}>
                 <Badge variant="secondary" className="hover:bg-secondary/80">
-                  {t("generationLabel", {
+                  {t('generationLabel', {
                     gen: pokemon.generation.toUpperCase(),
                   })}
                 </Badge>
               </Link>
             </div>
             <div className="space-y-2">
-              <p className="text-sm font-medium">{t("types")}</p>
+              <p className="text-sm font-medium">{t('types')}</p>
               <div className="flex flex-wrap gap-1.5">
                 {pokemon.types.map((type) => (
                   <Link key={type} href={`/${locale}/types/${type}`}>
@@ -125,5 +117,5 @@ export default async function PokemonDetailPage({ params }: PokemonDetailPagePro
         </CardContent>
       </Card>
     </main>
-  );
+  )
 }

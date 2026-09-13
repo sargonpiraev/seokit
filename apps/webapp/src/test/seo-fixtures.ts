@@ -1,160 +1,162 @@
+import { env } from '@/env'
+
 /** Independent SEO expectations for Playwright — not imported by the app. */
 
-export const LOCALES = ["en", "de", "fr"] as const;
-export type Locale = (typeof LOCALES)[number];
+export const LOCALES = ['en', 'de', 'fr'] as const
+export type Locale = (typeof LOCALES)[number]
 
-export const ORIGIN = process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:4100";
-export const DEFAULT_LOCALE: Locale = "en";
-export const SITE_NAME = "Pokédex";
+export const ORIGIN = env.NEXT_PUBLIC_SITE_URL
+export const DEFAULT_LOCALE: Locale = 'en'
+export const SITE_NAME = 'Pokédex'
 
-export function pageUrl(locale: Locale, path = "") {
-  const normalized = path.replace(/^\//, "");
-  return normalized ? `${ORIGIN}/${locale}/${normalized}` : `${ORIGIN}/${locale}`;
+export function pageUrl(locale: Locale, path = '') {
+  const normalized = path.replace(/^\//, '')
+  return normalized ? `${ORIGIN}/${locale}/${normalized}` : `${ORIGIN}/${locale}`
 }
 
-export function pathname(locale: Locale, path = "") {
-  const normalized = path.replace(/^\//, "");
-  return normalized ? `/${locale}/${normalized}` : `/${locale}`;
+export function pathname(locale: Locale, path = '') {
+  const normalized = path.replace(/^\//, '')
+  return normalized ? `/${locale}/${normalized}` : `/${locale}`
 }
 
-export function hreflangLanguages(path = "") {
-  const languages: Record<string, string> = {};
+export function hreflangLanguages(path = '') {
+  const languages: Record<string, string> = {}
   for (const locale of LOCALES) {
-    languages[locale] = pageUrl(locale, path);
+    languages[locale] = pageUrl(locale, path)
   }
-  languages["x-default"] = pageUrl(DEFAULT_LOCALE, path);
-  return languages;
+  languages['x-default'] = pageUrl(DEFAULT_LOCALE, path)
+  return languages
 }
 
 export const home = {
   en: {
-    title: "Pokédex",
-    description: "Explore Pokémon entries, types, and generations in one place.",
+    title: 'Pokédex',
+    description: 'Explore Pokémon entries, types, and generations in one place.',
   },
   de: {
-    title: "Pokédex",
-    description: "Entdecke Pokémon-Einträge, Typen und Generationen an einem Ort.",
+    title: 'Pokédex',
+    description: 'Entdecke Pokémon-Einträge, Typen und Generationen an einem Ort.',
   },
   fr: {
-    title: "Pokédex",
-    description: "Explorez les fiches, types et générations de Pokémon.",
+    title: 'Pokédex',
+    description: 'Explorez les fiches, types et générations de Pokémon.',
   },
-} as const satisfies Record<Locale, { title: string; description: string }>;
+} as const satisfies Record<Locale, { title: string; description: string }>
 
 export const pokemonList = {
   en: {
-    title: "Pokémon",
-    description: "Browse and filter the Pokédex catalog.",
-    homeCrumb: "Home",
+    title: 'Pokémon',
+    description: 'Browse and filter the Pokédex catalog.',
+    homeCrumb: 'Home',
   },
   de: {
-    title: "Pokémon",
-    description: "Durchsuche und filtere den Pokédex.",
-    homeCrumb: "Startseite",
+    title: 'Pokémon',
+    description: 'Durchsuche und filtere den Pokédex.',
+    homeCrumb: 'Startseite',
   },
   fr: {
-    title: "Pokémon",
-    description: "Parcourez et filtrez le catalogue du Pokédex.",
-    homeCrumb: "Accueil",
+    title: 'Pokémon',
+    description: 'Parcourez et filtrez le catalogue du Pokédex.',
+    homeCrumb: 'Accueil',
   },
-} as const;
+} as const
 
 export const typesList = {
   en: {
-    title: "Types",
-    description: "Browse elemental types and the Pokémon that share them.",
-    homeCrumb: "Home",
+    title: 'Types',
+    description: 'Browse elemental types and the Pokémon that share them.',
+    homeCrumb: 'Home',
   },
   de: {
-    title: "Typen",
-    description: "Entdecke Elementtypen und die Pokémon, die sie teilen.",
-    homeCrumb: "Startseite",
+    title: 'Typen',
+    description: 'Entdecke Elementtypen und die Pokémon, die sie teilen.',
+    homeCrumb: 'Startseite',
   },
   fr: {
-    title: "Types",
-    description: "Parcourez les types élémentaires et les Pokémon associés.",
-    homeCrumb: "Accueil",
+    title: 'Types',
+    description: 'Parcourez les types élémentaires et les Pokémon associés.',
+    homeCrumb: 'Accueil',
   },
-} as const;
+} as const
 
 export const generationsList = {
   en: {
-    title: "Generations",
-    description: "Browse Pokémon generations and their main regions.",
-    homeCrumb: "Home",
+    title: 'Generations',
+    description: 'Browse Pokémon generations and their main regions.',
+    homeCrumb: 'Home',
   },
   de: {
-    title: "Generationen",
-    description: "Entdecke Pokémon-Generationen und ihre Hauptregionen.",
-    homeCrumb: "Startseite",
+    title: 'Generationen',
+    description: 'Entdecke Pokémon-Generationen und ihre Hauptregionen.',
+    homeCrumb: 'Startseite',
   },
   fr: {
-    title: "Générations",
-    description: "Parcourez les générations de Pokémon et leurs régions.",
-    homeCrumb: "Accueil",
+    title: 'Générations',
+    description: 'Parcourez les générations de Pokémon et leurs régions.',
+    homeCrumb: 'Accueil',
   },
-} as const;
+} as const
 
 /** Known PokeAPI localized names (external contract). */
 export const charmander = {
   en: {
-    name: "Charmander",
+    name: 'Charmander',
     description: /Charmander/,
-    homeCrumb: "Home",
-    listTitle: "Pokémon",
+    homeCrumb: 'Home',
+    listTitle: 'Pokémon',
   },
   de: {
-    name: "Glumanda",
+    name: 'Glumanda',
     description: /Glumanda/,
-    homeCrumb: "Startseite",
-    listTitle: "Pokémon",
+    homeCrumb: 'Startseite',
+    listTitle: 'Pokémon',
   },
   fr: {
-    name: "Salamèche",
+    name: 'Salamèche',
     description: /Salamèche/,
-    homeCrumb: "Accueil",
-    listTitle: "Pokémon",
+    homeCrumb: 'Accueil',
+    listTitle: 'Pokémon',
   },
-} as const;
+} as const
 
 export const fireType = {
   en: {
-    name: "Fire",
-    description: "Fire type — strengths, weaknesses, and Pokémon.",
-    homeCrumb: "Home",
-    listTitle: "Types",
+    name: 'Fire',
+    description: 'Fire type — strengths, weaknesses, and Pokémon.',
+    homeCrumb: 'Home',
+    listTitle: 'Types',
   },
   de: {
-    name: "Feuer",
-    description: "Typ Feuer — Stärken, Schwächen und Pokémon.",
-    homeCrumb: "Startseite",
-    listTitle: "Typen",
+    name: 'Feuer',
+    description: 'Typ Feuer — Stärken, Schwächen und Pokémon.',
+    homeCrumb: 'Startseite',
+    listTitle: 'Typen',
   },
   fr: {
-    name: "Feu",
-    description: "Type Feu — forces, faiblesses et Pokémon.",
-    homeCrumb: "Accueil",
-    listTitle: "Types",
+    name: 'Feu',
+    description: 'Type Feu — forces, faiblesses et Pokémon.',
+    homeCrumb: 'Accueil',
+    listTitle: 'Types',
   },
-} as const;
+} as const
 
 export const generationI = {
   en: {
-    name: "Generation I",
-    description: "Generation I — Pokémon and types from this era.",
-    homeCrumb: "Home",
-    listTitle: "Generations",
+    name: 'Generation I',
+    description: 'Generation I — Pokémon and types from this era.',
+    homeCrumb: 'Home',
+    listTitle: 'Generations',
   },
   de: {
-    name: "Generation I",
-    description: "Generation I — Pokémon und Typen dieser Ära.",
-    homeCrumb: "Startseite",
-    listTitle: "Generationen",
+    name: 'Generation I',
+    description: 'Generation I — Pokémon und Typen dieser Ära.',
+    homeCrumb: 'Startseite',
+    listTitle: 'Generationen',
   },
   fr: {
-    name: "1re Génération",
-    description: "1re Génération — Pokémon et types de cette ère.",
-    homeCrumb: "Accueil",
-    listTitle: "Générations",
+    name: '1re Génération',
+    description: '1re Génération — Pokémon et types de cette ère.',
+    homeCrumb: 'Accueil',
+    listTitle: 'Générations',
   },
-} as const;
+} as const

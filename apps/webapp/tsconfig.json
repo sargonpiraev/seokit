@@ -2,10 +2,17 @@
   "extends": "@repo/typescript-config/nextjs.json",
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules",
     "**/*.seo.spec.ts",
@@ -14,6 +21,7 @@
     "**/*.visual.spec.ts",
     "playwright.config.ts",
     "e2e/**",
-    "src/test/**"
+    "src/test/**",
+    "pulumi.ts"
   ]
 }

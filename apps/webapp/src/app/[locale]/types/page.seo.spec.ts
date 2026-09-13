@@ -1,19 +1,13 @@
-import { expect, test } from "@/test/seokit";
-import {
-  hreflangLanguages,
-  LOCALES,
-  ORIGIN,
-  pathname,
-  typesList,
-} from "@/test/seo-fixtures";
+import { expect, test } from '@/test/seokit'
+import { hreflangLanguages, LOCALES, ORIGIN, pathname, typesList } from '@/test/seo-fixtures'
 
 for (const locale of LOCALES) {
-  test(`${pathname(locale, "types")} SEO`, async ({ page }) => {
-    const path = pathname(locale, "types");
-    const response = await page.goto(path);
-    expect(response?.ok()).toBeTruthy();
+  test(`${pathname(locale, 'types')} SEO`, async ({ page }) => {
+    const path = pathname(locale, 'types')
+    const response = await page.goto(path)
+    expect(response?.ok()).toBeTruthy()
 
-    const copy = typesList[locale];
+    const copy = typesList[locale]
 
     await expect(page).toHaveMetadata({
       lang: locale,
@@ -21,22 +15,22 @@ for (const locale of LOCALES) {
       description: copy.description,
       alternates: {
         canonical: `${ORIGIN}${path}`,
-        languages: hreflangLanguages("types"),
+        languages: hreflangLanguages('types'),
       },
-    });
+    })
 
     await expect(page).toHaveJsonLd([
       {
-        "@type": "BreadcrumbList",
+        '@type': 'BreadcrumbList',
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: copy.homeCrumb },
-          { "@type": "ListItem", position: 2, name: copy.title },
+          { '@type': 'ListItem', position: 1, name: copy.homeCrumb },
+          { '@type': 'ListItem', position: 2, name: copy.title },
         ],
       },
       {
-        "@type": "ItemList",
+        '@type': 'ItemList',
         name: copy.title,
       },
-    ]);
-  });
+    ])
+  })
 }

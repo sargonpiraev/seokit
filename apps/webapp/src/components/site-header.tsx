@@ -1,17 +1,17 @@
-import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 
-import { LocaleSwitcher } from "@/components/locale-switcher";
-import { buttonVariants } from "@/components/ui/button";
-import { SITE_NAME } from "@/lib/metadata";
-import { cn } from "@/lib/utils";
+import { LocaleSwitcher } from '@/components/locale-switcher'
+import { buttonVariants } from '@/components/ui/button'
+import { SITE_NAME } from '@/lib/metadata'
+import { cn } from '@/lib/utils'
 
 type SiteHeaderProps = {
-  locale: string;
-};
+  locale: string
+}
 
 export async function SiteHeader({ locale }: SiteHeaderProps) {
-  const t = await getTranslations("nav");
+  const t = await getTranslations('nav')
 
   return (
     <header className="border-b">
@@ -22,25 +22,25 @@ export async function SiteHeader({ locale }: SiteHeaderProps) {
           </Link>
           <Link
             href={`/${locale}/pokemon`}
-            className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
+            className={cn(buttonVariants({ variant: 'ghost', size: 'sm' }))}
           >
-            {t("pokemon")}
+            {t('pokemon')}
           </Link>
           <Link
             href={`/${locale}/types`}
-            className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
+            className={cn(buttonVariants({ variant: 'ghost', size: 'sm' }))}
           >
-            {t("types")}
+            {t('types')}
           </Link>
           <Link
             href={`/${locale}/generations`}
-            className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
+            className={cn(buttonVariants({ variant: 'ghost', size: 'sm' }))}
           >
-            {t("generations")}
+            {t('generations')}
           </Link>
         </div>
-        <LocaleSwitcher locale={locale} label={t("locales")} />
+        <LocaleSwitcher locale={locale} label={t('locales')} />
       </div>
     </header>
-  );
+  )
 }

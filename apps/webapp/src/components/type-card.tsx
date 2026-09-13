@@ -1,18 +1,13 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import type { LocalizedType } from "@/lib/pokeapi";
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import type { LocalizedType } from '@/lib/pokeapi'
 
 type TypeCardProps = {
-  locale: string;
-  type: LocalizedType;
-  pokemonCountLabel: string;
-};
+  locale: string
+  type: LocalizedType
+  pokemonCountLabel: string
+}
 
 export function TypeCard({ locale, type, pokemonCountLabel }: TypeCardProps) {
   return (
@@ -25,5 +20,5 @@ export function TypeCard({ locale, type, pokemonCountLabel }: TypeCardProps) {
         </CardHeader>
       </Card>
     </Link>
-  );
+  )
 }

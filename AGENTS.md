@@ -25,17 +25,17 @@ npm test                         # package unit tests
 npm run test:webapp -w @sargonpiraev/seokit   # webapp build + Playwright suites
 npm run build -w @sargonpiraev/seokit
 npm run check-types
-npm run test:visual              # host Next + Playwright Docker Chromium
-npm run test:visual:update       # same, --update-snapshots
+npm run test:spec:visual              # host Next + Playwright Docker Chromium
+npm run test:spec:visual:update       # same, --update-snapshots
 ```
 
 Webapp `npm test` builds Next first (needs network for PokeAPI on cold cache).
 
 ## Visual baselines
 
-CI (`test-webapp`) runs *inside* `mcr.microsoft.com/playwright:v{lockfile}-jammy` (image derived from `@playwright/test` in `package-lock.json`). Locally the Next app stays on the host; Docker only provides Chromium via `playwright run-server`.
+CI (`test-webapp`) runs _inside_ `mcr.microsoft.com/playwright:v{lockfile}-jammy` (image derived from `@playwright/test` in `package-lock.json`). Locally the Next app stays on the host; Docker only provides Chromium via `playwright run-server`.
 
-Update screenshots with `npm run test:visual:update` (`scripts/pw-visual-docker.sh`) — not bare macOS Chromium.
+Update screenshots with `npm run test:spec:visual:update` (`scripts/pw-visual-docker.sh`) — not bare macOS Chromium.
 
 ## npm rename (`seodit` → `seokit`)
 

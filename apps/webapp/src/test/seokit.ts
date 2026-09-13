@@ -1,6 +1,6 @@
-import { expect as baseExpect, test } from "@playwright/test";
-import { extendSeokitExpect } from "@sargonpiraev/seokit";
+import { expect as baseExpect, test } from '@playwright/test'
+import { extendSeokitExpect } from '@sargonpiraev/seokit'
 
-const expect = extendSeokitExpect(baseExpect);
+const expect = extendSeokitExpect(baseExpect)
 
-export { test, expect };
+export { test, expect }

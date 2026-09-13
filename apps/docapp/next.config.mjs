@@ -2,8 +2,10 @@ import { createMDX } from 'fumadocs-mdx/next'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { env } from './env.mjs'
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const basePath = process.env.DOCS_BASE_PATH ?? ''
+const basePath = env.DOCS_BASE_PATH ?? ''
 const reactProduction = path.resolve(__dirname, '../../node_modules/react/cjs/react.production.js')
 const reactDevelopment = path.resolve(__dirname, '../../node_modules/react/cjs/react.development.js')
 const reactDomProduction = path.resolve(

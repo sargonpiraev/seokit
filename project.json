@@ -2,20 +2,14 @@
   "name": "seokit",
   "$schema": "./node_modules/@sargonpiraev/eslint-config/build/schemas/project__project.json",
   "projectType": "library",
-  "tags": [
-    "shared",
-    "seo",
-    "type:lib",
-    "stack:playwright",
-    "status:active"
-  ],
   "metadata": {
     "description": "Playwright SEO matchers (toHaveMetadata, toHaveJsonLd)",
     "technologies": [
       "playwright",
       "typescript",
       "turbo"
-    ]
+    ],
+    "portBegins": 50700
   },
   "targets": {
     "test": {
@@ -67,44 +61,9 @@
         "cwd": "seokit"
       }
     },
-    "test:functional": {
-      "cache": false,
-      "command": "npm run test:functional",
-      "options": {
-        "cwd": "seokit"
-      }
-    },
-    "test:seo": {
-      "cache": false,
-      "command": "npm run test:seo",
-      "options": {
-        "cwd": "seokit"
-      }
-    },
-    "test:analytics": {
-      "cache": false,
-      "command": "npm run test:analytics",
-      "options": {
-        "cwd": "seokit"
-      }
-    },
     "test:spec": {
       "cache": false,
       "command": "npm run test:spec",
-      "options": {
-        "cwd": "seokit"
-      }
-    },
-    "test:visual": {
-      "cache": false,
-      "command": "npm run test:visual",
-      "options": {
-        "cwd": "seokit"
-      }
-    },
-    "test:cwv": {
-      "cache": false,
-      "command": "npm run test:cwv",
       "options": {
         "cwd": "seokit"
       }
@@ -140,6 +99,41 @@
     "test:pulumi": {
       "cache": false,
       "command": "npm run test:pulumi",
+      "options": {
+        "cwd": "seokit"
+      }
+    },
+    "test:spec:feat": {
+      "cache": false,
+      "command": "npm run test:spec:feat",
+      "options": {
+        "cwd": "seokit"
+      }
+    },
+    "test:spec:seokit": {
+      "cache": false,
+      "command": "npm run test:spec:seokit",
+      "options": {
+        "cwd": "seokit"
+      }
+    },
+    "test:spec:perf": {
+      "cache": false,
+      "command": "npm run test:spec:perf",
+      "options": {
+        "cwd": "seokit"
+      }
+    },
+    "test:spec:visual": {
+      "cache": false,
+      "command": "npm run test:spec:visual",
+      "options": {
+        "cwd": "seokit"
+      }
+    },
+    "format": {
+      "cache": false,
+      "command": "npm run format",
       "options": {
         "cwd": "seokit"
       }

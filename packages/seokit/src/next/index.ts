@@ -1,6 +1,6 @@
-export { createSeokitPageRoutes } from "./routes.js";
-export { assertSeokitRouteBasics } from "./assertions.js";
-export type { SeokitRouteBasicsExpect } from "./assertions.js";
+export { createSeokitPageRoutes } from './routes.js'
+export { assertSeokitRouteBasics } from './assertions.js'
+export type { SeokitRouteBasicsExpect } from './assertions.js'
 export {
   readNextPageRoutes,
   inferRouteFromSpec,
@@ -8,6 +8,6 @@ export {
   manifestKeyToRoutePattern,
   discoverSeokitSpecRoutes,
   readAppPathRoutesManifest,
-} from "./manifest.js";
-export { checkSeokitSpecCoverage, formatSeokitSpecCoverageWarnings } from "./coverage.js";
-export type * from "./types.js";
+} from './manifest.js'
+export { checkSeokitSpecCoverage, formatSeokitSpecCoverageWarnings } from './coverage.js'
+export type * from './types.js'

@@ -1,29 +1,17 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import type { LocalizedGeneration } from "@/lib/pokeapi";
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import type { LocalizedGeneration } from '@/lib/pokeapi'
 
 type GenerationCardProps = {
-  locale: string;
-  generation: LocalizedGeneration;
-  regionLabel: string;
-};
+  locale: string
+  generation: LocalizedGeneration
+  regionLabel: string
+}
 
-export function GenerationCard({
-  locale,
-  generation,
-  regionLabel,
-}: GenerationCardProps) {
+export function GenerationCard({ locale, generation, regionLabel }: GenerationCardProps) {
   return (
-    <Link
-      href={`/${locale}/generations/${generation.slug}`}
-      className="group block"
-    >
+    <Link href={`/${locale}/generations/${generation.slug}`} className="group block">
       <Card className="h-full transition-colors group-hover:border-primary/40">
         <CardHeader>
           <CardDescription>#{generation.id}</CardDescription>
@@ -32,5 +20,5 @@ export function GenerationCard({
         </CardHeader>
       </Card>
     </Link>
-  );
+  )
 }

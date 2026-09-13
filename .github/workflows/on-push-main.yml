@@ -64,13 +64,13 @@ jobs:
           PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
 
       - name: Webapp visual
-        run: npm run test:visual
+        run: npm run test:spec:visual
         env:
           CI: true
           PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
 
-      - name: Webapp cwv
-        run: npm run test:cwv
+      - name: Webapp perf
+        run: npm run test:spec:perf
         env:
           CI: true
           PLAYWRIGHT_BROWSERS_PATH: /ms-playwright

@@ -1,7 +1,4 @@
-import {
-  createFileSystemGeneratorCache,
-  createGenerator,
-} from 'fumadocs-typescript'
+import { createFileSystemGeneratorCache, createGenerator } from 'fumadocs-typescript'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 

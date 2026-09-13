@@ -1,33 +1,22 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image'
+import Link from 'next/link'
 
-import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import type { LocalizedPokemon } from "@/lib/pokeapi";
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import type { LocalizedPokemon } from '@/lib/pokeapi'
 
 type PokemonCardProps = {
-  locale: string;
-  pokemon: LocalizedPokemon;
-};
+  locale: string
+  pokemon: LocalizedPokemon
+}
 
 export function PokemonCard({ locale, pokemon }: PokemonCardProps) {
   return (
     <Card className="h-full transition-colors hover:border-primary/40">
-      <Link
-        href={`/${locale}/pokemon/${pokemon.slug}`}
-        className="group block"
-      >
+      <Link href={`/${locale}/pokemon/${pokemon.slug}`} className="group block">
         <CardHeader className="pb-2">
           <CardDescription>#{pokemon.id}</CardDescription>
-          <CardTitle className="text-lg group-hover:underline">
-            {pokemon.name}
-          </CardTitle>
+          <CardTitle className="text-lg group-hover:underline">{pokemon.name}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
           {pokemon.imageUrl ? (
@@ -55,5 +44,5 @@ export function PokemonCard({ locale, pokemon }: PokemonCardProps) {
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

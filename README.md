@@ -27,20 +27,20 @@ npm install @sargonpiraev/seokit @playwright/test
 ## Quick start
 
 ```typescript
-import { expect as baseExpect, test } from "@playwright/test";
-import { extendSeokitExpect } from "@sargonpiraev/seokit";
+import { expect as baseExpect, test } from '@playwright/test'
+import { extendSeokitExpect } from '@sargonpiraev/seokit'
 
-const expect = extendSeokitExpect(baseExpect);
+const expect = extendSeokitExpect(baseExpect)
 
-test("/en", async ({ page }) => {
-  await page.goto("/en");
+test('/en', async ({ page }) => {
+  await page.goto('/en')
   await expect(page).toHaveMetadata({
-    lang: "en",
+    lang: 'en',
     title: /.+/,
-    alternates: { canonical: "https://example.com/en" },
-  });
-  await expect(page).toHaveJsonLd([{ "@type": "Organization" }]);
-});
+    alternates: { canonical: 'https://example.com/en' },
+  })
+  await expect(page).toHaveJsonLd([{ '@type': 'Organization' }])
+})
 ```
 
 ## Skill (optional)

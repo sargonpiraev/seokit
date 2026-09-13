@@ -6,14 +6,15 @@ import { remark } from 'remark'
 import remarkRehype from 'remark-rehype'
 import * as JsxRuntime from 'react/jsx-runtime'
 
-const processor = remark().use(remarkGfm).use(remarkRehype).use(rehypeCode, {
-  langs: ['ts', 'tsx', 'html'],
-})
+const processor = remark()
+  .use(remarkGfm)
+  .use(remarkRehype)
+  .use(rehypeCode, {
+    langs: ['ts', 'tsx', 'html'],
+  })
 
 export async function renderMarkdownToJsx(markdown: string) {
-  const hast = await processor.run(
-    processor.parse(markdown.replace(/{@link ([^}]*)}/g, '$1')),
-  )
+  const hast = await processor.run(processor.parse(markdown.replace(/{@link ([^}]*)}/g, '$1')))
 
   return toJsxRuntime(hast, {
     ...JsxRuntime,

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Local: Next on the host; Chromium from the Microsoft Playwright image (run-server).
 # CI: already inside that image — workspace visual only (no nested Docker, no npm ci here).
-# Usage: npm run test:visual | npm run test:visual:update
+# Usage: npm run test:spec:visual | npm run test:spec:visual:update
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -16,9 +16,9 @@ CID="seokit-pw-visual"
 
 run_workspace_visual() {
   if [ "${UPDATE_SNAPSHOTS:-}" = "--update-snapshots" ]; then
-    npm run test:visual -w seokit-webapp -- --update-snapshots
+    npm run test:spec:visual -w seokit-webapp -- --update-snapshots
   else
-    npm run test:visual -w seokit-webapp
+    npm run test:spec:visual -w seokit-webapp
   fi
 }
 

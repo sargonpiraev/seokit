@@ -7,6 +7,7 @@ Locales (from PokeAPI `pokemon-species` names): **`en` · `de` · `fr`**.
 ## UI
 
 Minimal **shadcn/ui** catalog shell:
+
 - Home landing: hero + starters + featured + types + generations
 - `/pokemon`: search + type + generation filters, card grid
 - `/types` · `/generations`: taxonomy catalogs with detail pages
@@ -14,14 +15,14 @@ Minimal **shadcn/ui** catalog shell:
 
 ## Entities
 
-| Route | What |
-| --- | --- |
-| `/[locale]` | Home |
-| `/[locale]/pokemon` | Card grid + search |
-| `/[locale]/pokemon/[name]` | Pokémon detail |
-| `/[locale]/types` | Type catalog |
-| `/[locale]/types/[slug]` | Type detail (relations + Pokémon) |
-| `/[locale]/generations` | Generation catalog |
+| Route                          | What                                 |
+| ------------------------------ | ------------------------------------ |
+| `/[locale]`                    | Home                                 |
+| `/[locale]/pokemon`            | Card grid + search                   |
+| `/[locale]/pokemon/[name]`     | Pokémon detail                       |
+| `/[locale]/types`              | Type catalog                         |
+| `/[locale]/types/[slug]`       | Type detail (relations + Pokémon)    |
+| `/[locale]/generations`        | Generation catalog                   |
 | `/[locale]/generations/[slug]` | Generation detail (region + Pokémon) |
 
 ## SEO
