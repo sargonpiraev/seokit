@@ -121,6 +121,7 @@ jobs:
         working-directory: packages/seokit
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LEFTHOOK: '0'
 
   publish-docs:
     needs: [base, test-webapp]
