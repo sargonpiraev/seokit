@@ -14,7 +14,7 @@
     "@pulumi/gcp": "^9.34.1",
     "@pulumi/pulumi": "3.256.0",
     "@pulumiverse/vercel": "^1.0.0",
-    "@sargonpiraev/pulumi-apps": "^1.7.0",
+    "@sargonpiraev/pulumi-apps": "1.10.0",
     "dotenv": "^16.0.0"
   },
   "devDependencies": {
