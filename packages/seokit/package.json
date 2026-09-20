@@ -1,6 +1,6 @@
 {
   "name": "@sargonpiraev/seokit",
-  "version": "0.22.0",
+  "version": "0.23.0",
   "private": false,
   "description": "Two Playwright expect matchers for SEO checks — toHaveMetadata and toHaveJsonLd",
   "homepage": "https://sargonpiraev.github.io/seokit/docs",
