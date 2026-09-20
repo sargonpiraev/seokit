@@ -1,3 +1,5 @@
+import assert from 'node:assert/strict'
+import { describe, it } from 'node:test'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { manifestKeyToRoutePattern, readNextPageRoutes, specFileToManifestKey } from './manifest.js'
@@ -14,15 +16,15 @@ const routing = {
 describe('next manifest helpers', () => {
   it('maps colocated spec files to manifest keys', () => {
     const key = specFileToManifestKey('/project/src/app/[locale]/products/page.spec.ts')
-    expect(key).toBe('/[locale]/products/page')
-    expect(manifestKeyToRoutePattern(key!)).toBe('/[locale]/products')
+    assert.equal(key, '/[locale]/products/page')
+    assert.equal(manifestKeyToRoutePattern(key!), '/[locale]/products')
     const seoKey = specFileToManifestKey('/project/src/app/[locale]/products/page.seo.spec.ts')
-    expect(seoKey).toBe('/[locale]/products/page')
+    assert.equal(seoKey, '/[locale]/products/page')
   })
 
   it('reads page routes from Next build manifest', () => {
     const routes = readNextPageRoutes({ buildDir: fixtureDir })
-    expect(routes).toEqual(['/', '/[locale]', '/[locale]/products', '/[locale]/products/[id]'])
+    assert.deepEqual(routes, ['/', '/[locale]', '/[locale]/products', '/[locale]/products/[id]'])
   })
 })
 
@@ -37,13 +39,16 @@ describe('createSeokitPageRoutes', () => {
       origin: 'http://localhost:3000',
     })
 
-    expect(routes.map((route) => route.pathname)).toEqual(['/en/products', '/ru/products'])
-    expect(routes[0]?.absoluteUrl()).toBe('http://localhost:3000/en/products')
-    expect(routes[0]?.alternates()).toEqual([
+    assert.deepEqual(
+      routes.map((route) => route.pathname),
+      ['/en/products', '/ru/products']
+    )
+    assert.equal(routes[0]?.absoluteUrl(), 'http://localhost:3000/en/products')
+    assert.deepEqual(routes[0]?.alternates(), [
       { locale: 'en', url: 'http://localhost:3000/en/products' },
       { locale: 'ru', url: 'http://localhost:3000/ru/products' },
     ])
-    expect(routes[0]?.xDefaultUrl()).toBe('http://localhost:3000/en/products')
+    assert.equal(routes[0]?.xDefaultUrl(), 'http://localhost:3000/en/products')
   })
 
   it('applies dynamic params for localized detail routes', () => {
@@ -56,10 +61,10 @@ describe('createSeokitPageRoutes', () => {
       params: [{ id: 'alpha' }],
     })
 
-    expect(routes.map((route) => route.pathname)).toEqual([
-      '/en/products/alpha',
-      '/ru/products/alpha',
-    ])
+    assert.deepEqual(
+      routes.map((route) => route.pathname),
+      ['/en/products/alpha', '/ru/products/alpha']
+    )
   })
 
   it('asserts route basics with canonical and hreflang alternates', async () => {
@@ -80,7 +85,7 @@ describe('createSeokitPageRoutes', () => {
 
     await assertSeokitRouteBasics(expectFn, {} as never, route!)
 
-    expect(calls).toEqual([
+    assert.deepEqual(calls, [
       {
         lang: 'en',
         alternates: {
@@ -108,7 +113,10 @@ describe('checkSeokitSpecCoverage', () => {
       buildDir: fixtureDir,
     })
 
-    expect(result.missingSpecs).toContain('/[locale]')
-    expect(result.warnings.some((warning) => warning.includes('/[locale]'))).toBe(true)
+    assert.equal(result.missingSpecs.includes('/[locale]'), true)
+    assert.equal(
+      result.warnings.some((warning) => warning.includes('/[locale]')),
+      true
+    )
   })
 })
